@@ -1,0 +1,666 @@
+* Analýza IP adres
+:PROPERTIES:
+:header-args: :dir ~/dev/igloonet/talky/2017/openalt :exports both
+:END:
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> #+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
+Pro zákazníka potřebujeme zauditovat použité IP adresy na serverech. Zjistit, na kterých je něco rozjeté a které je možné ze strojů uvolnit.
+
+* Rozjet si infrastrukturu na testování                                                   :noexport:
+:PROPERTIES:
+:header-args: :dir ~/dev/igloonet/talky/2017/openalt/vagrants :results pp :var DEBIAN_FRONTEND="noninteractive" :exports none
+:END:
+** Rozjet si nějaké test servery ve vagrantu
+
+*** Nejdřív test
+Nejdřív si potřebuji vyzkoušet, jak to vůbec funguje
+
+#+BEGIN_SRC sh :results drawer
+mkdir -p test
+cd test
+[[ -f "Vagrantfile" ]] && vagrant destroy --force && /bin/rm Vagrantfile
+vagrant init debian/stretch64
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+==> default: VM not created. Moving on...
+A `Vagrantfile` has been placed in this directory. You are now
+ready to `vagrant up` your first virtual environment! Please read
+the comments in the Vagrantfile as well as documentation on
+`vagrantup.com` for more information on using Vagrant.
+:END:
+
+#+BEGIN_SRC sh :results drawer
+cd test
+cat Vagrantfile
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "debian/stretch64"
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:8080" will access port 80 on the guest machine.
+  # NOTE: This will enable public access to the opened port
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine and only allow access
+  # via 127.0.0.1 to disable public access
+  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  # config.vm.network "private_network", ip: "192.168.33.10"
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  # config.vm.network "public_network"
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  # config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = "1024"
+  # end
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   apt-get update
+  #   apt-get install -y apache2
+  # SHELL
+end
+:END:
+
+Ok, to je zbytečně výřečný, takže trošku pročistíme. V orgu lze využít [[http://orgmode.org/manual/tangle.html][tangle]] k zápisu obsahu code blocku do souboru.
+
+#+BEGIN_SRC ruby :tangle vagrants/test/Vagrantfile
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/stretch64"
+  config.vm.hostname = "test"
+  config.vm.network "private_network", ip: "192.168.17.99"
+  config.ssh.keys_only
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "test"
+    v.linked_clone = true
+  end
+end
+#+END_SRC
+
+#+RESULTS:
+
+zkusíme nastartovat
+
+#+BEGIN_SRC sh :results drawer
+cd test
+vagrant halt
+vagrant up
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+==> default: Attempting graceful shutdown of VM...
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'debian/stretch64' is up to date...
+==> default: Clearing any previously set forwarded ports...
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: hostonly
+==> default: Forwarding ports...
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default: 
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==> default: Setting hostname...
+==> default: Configuring and enabling network interfaces...
+==> default: Rsyncing folder: /home/kepi/dev/igloonet/talky/2017/openalt/vagrants/test/ => /vagrant
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+==> default: Machine 'default' has a post `vagrant up` message. This is a message
+==> default: from the creator of the Vagrantfile, and not from Vagrant itself:
+==> default: 
+==> default: Vanilla Debian box. See https://app.vagrantup.com/debian for help and bug reports
+:END:
+
+*** Naostro
+
+#+NAME: vagrants
+- alpha
+- beta
+- gamma
+  
+#+BEGIN_SRC ruby :tangle vagrants/Vagrantfile
+$addips_script = <<SCRIPT
+echo adding ips
+for i in $@; do 
+    ip addr add 192.168.17.${i} dev eth1
+done
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/stretch64"
+
+  config.vm.provider "virtualbox" do |v|
+    v.linked_clone = true
+  end
+
+  config.vm.define "alpha" do |alpha|
+    alpha.vm.hostname = "alpha.openalt"
+    alpha.vm.network "private_network", ip: "192.168.17.2"
+
+    alpha.vm.provider "virtualbox" do |v|
+      v.name = "alpha.openalt"
+    end
+
+    alpha.vm.provision "shell", run: "always", inline: $addips_script, args: [21,99,66,34,91,102,88]
+  end
+  config.vm.define "beta" do |beta|
+    beta.vm.hostname = "beta.openalt"
+    beta.vm.network "private_network", ip: "192.168.17.3"
+
+    beta.vm.provider "virtualbox" do |v|
+      v.name = "beta.openalt"
+    end
+
+    beta.vm.provision "shell", run: "always", inline: $addips_script, args: [27,133,98,11,12,15,33,44]
+  end
+  config.vm.define "gamma" do |gamma|
+    gamma.vm.hostname = "gamma.openalt"
+    gamma.vm.network "private_network", ip: "192.168.17.4"
+
+    gamma.vm.provider "virtualbox" do |v|
+      v.name = "gamma.openalt"
+    end
+  end
+end
+#+END_SRC
+
+nahodíme je
+
+#+BEGIN_SRC bash
+vagrant up
+#+END_SRC
+
+přidáme SSH klíč můj
+
+#+BEGIN_SRC sh :var vagrants=vagrants
+for v in $vagrants; do
+    cat ~/.ssh/id_rsa.pub | vagrant ssh $v -c "cat - >> ~/.ssh/authorized_keys"
+done
+#+END_SRC
+
+#+RESULTS:
+
+**** Nastavíme alpha
+#+BEGIN_SRC sh :dir /sudo:root@alpha.openalt:
+sudo apt -y install apache2
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 1%Reading state information... Done
+The following additional packages will be installed:
+  apache2-bin apache2-data apache2-utils libapr1 libaprutil1
+  libaprutil1-dbd-sqlite3 libaprutil1-ldap liblua5.2-0 ssl-cert
+Suggested packages:
+  www-browser apache2-doc apache2-suexec-pristine | apache2-suexec-custom
+  openssl-blacklist
+The following NEW packages will be installed:
+  apache2 apache2-bin apache2-data apache2-utils libapr1 libaprutil1
+  libaprutil1-dbd-sqlite3 libaprutil1-ldap liblua5.2-0 ssl-cert
+0 upgraded, 10 newly installed, 0 to remove and 2 not upgraded.
+Need to get 2,144 kB of archives.
+After this operation, 7,137 kB of additional disk space will be used.
+[33m0% [Working][0m            Get:1 http://deb.debian.org/debian stretch/main amd64 libapr1 amd64 1.5.2-5 [96.6 kB]
+[33m0% [1 libapr1 0 B/96.6 kB 0%][0m[33m                             6% [Working][0m            Get:2 http://deb.debian.org/debian stretch/main amd64 libaprutil1 amd64 1.5.4-3 [85.8 kB]
+[33m6% [2 libaprutil1 0 B/85.8 kB 0%][0m[33m                                 11% [Working][0m             Get:3 http://deb.debian.org/debian stretch/main amd64 libaprutil1-dbd-sqlite3 amd64 1.5.4-3 [19.3 kB]
+[33m11% [3 libaprutil1-dbd-sqlite3 0 B/19.3 kB 0%][0m[33m                                              14% [Working][0m             Get:4 http://deb.debian.org/debian stretch/main amd64 libaprutil1-ldap amd64 1.5.4-3 [17.4 kB]
+[33m14% [4 libaprutil1-ldap 0 B/17.4 kB 0%][0m[33m                                       16% [Working][0m             Get:5 http://deb.debian.org/debian stretch/main amd64 liblua5.2-0 amd64 5.2.4-1.1+b2 [110 kB]
+[33m16% [5 liblua5.2-0 0 B/110 kB 0%][0m[33m                                 22% [Working][0m             Get:6 http://deb.debian.org/debian stretch/main amd64 apache2-bin amd64 2.4.25-3+deb9u3 [1,181 kB]
+[33m22% [6 apache2-bin 0 B/1,181 kB 0%][0m[33m                                   68% [Working][0m             Get:7 http://deb.debian.org/debian stretch/main amd64 apache2-utils amd64 2.4.25-3+deb9u3 [217 kB]
+[33m68% [7 apache2-utils 0 B/217 kB 0%][0m[33m                                   78% [Working][0m             Get:8 http://deb.debian.org/debian stretch/main amd64 apache2-data all 2.4.25-3+deb9u3 [162 kB]
+[33m78% [8 apache2-data 0 B/162 kB 0%][0m[33m                                  86% [Working][0m             Get:9 http://deb.debian.org/debian stretch/main amd64 apache2 amd64 2.4.25-3+deb9u3 [235 kB]
+[33m86% [9 apache2 0 B/235 kB 0%][0m[33m                             97% [Working][0m             Get:10 http://deb.debian.org/debian stretch/main amd64 ssl-cert all 1.0.39 [20.8 kB]
+[33m97% [10 ssl-cert 0 B/20.8 kB 0%][0m[33m                                100% [Working][0m              Fetched 2,144 kB in 0s (2,799 kB/s)
+Preconfiguring packages ...
+Selecting previously unselected package libapr1:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 26677 files and directories currently installed.)
+Preparing to unpack .../0-libapr1_1.5.2-5_amd64.deb ...
+Unpacking libapr1:amd64 (1.5.2-5) ...
+Selecting previously unselected package libaprutil1:amd64.
+Preparing to unpack .../1-libaprutil1_1.5.4-3_amd64.deb ...
+Unpacking libaprutil1:amd64 (1.5.4-3) ...
+Selecting previously unselected package libaprutil1-dbd-sqlite3:amd64.
+Preparing to unpack .../2-libaprutil1-dbd-sqlite3_1.5.4-3_amd64.deb ...
+Unpacking libaprutil1-dbd-sqlite3:amd64 (1.5.4-3) ...
+Selecting previously unselected package libaprutil1-ldap:amd64.
+Preparing to unpack .../3-libaprutil1-ldap_1.5.4-3_amd64.deb ...
+Unpacking libaprutil1-ldap:amd64 (1.5.4-3) ...
+Selecting previously unselected package liblua5.2-0:amd64.
+Preparing to unpack .../4-liblua5.2-0_5.2.4-1.1+b2_amd64.deb ...
+Unpacking liblua5.2-0:amd64 (5.2.4-1.1+b2) ...
+Selecting previously unselected package apache2-bin.
+Preparing to unpack .../5-apache2-bin_2.4.25-3+deb9u3_amd64.deb ...
+Unpacking apache2-bin (2.4.25-3+deb9u3) ...
+Selecting previously unselected package apache2-utils.
+Preparing to unpack .../6-apache2-utils_2.4.25-3+deb9u3_amd64.deb ...
+Unpacking apache2-utils (2.4.25-3+deb9u3) ...
+Selecting previously unselected package apache2-data.
+Preparing to unpack .../7-apache2-data_2.4.25-3+deb9u3_all.deb ...
+Unpacking apache2-data (2.4.25-3+deb9u3) ...
+Selecting previously unselected package apache2.
+Preparing to unpack .../8-apache2_2.4.25-3+deb9u3_amd64.deb ...
+Unpacking apache2 (2.4.25-3+deb9u3) ...
+Selecting previously unselected package ssl-cert.
+Preparing to unpack .../9-ssl-cert_1.0.39_all.deb ...
+Unpacking ssl-cert (1.0.39) ...
+Setting up libapr1:amd64 (1.5.2-5) ...
+Setting up apache2-data (2.4.25-3+deb9u3) ...
+Setting up ssl-cert (1.0.39) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+debconf: falling back to frontend: Readline
+Processing triggers for libc-bin (2.24-11+deb9u1) ...
+Setting up libaprutil1:amd64 (1.5.4-3) ...
+Processing triggers for systemd (232-25+deb9u1) ...
+Processing triggers for man-db (2.7.6.1-2) ...
+Setting up liblua5.2-0:amd64 (5.2.4-1.1+b2) ...
+Setting up libaprutil1-ldap:amd64 (1.5.4-3) ...
+Setting up libaprutil1-dbd-sqlite3:amd64 (1.5.4-3) ...
+Setting up apache2-utils (2.4.25-3+deb9u3) ...
+Setting up apache2-bin (2.4.25-3+deb9u3) ...
+Setting up apache2 (2.4.25-3+deb9u3) ...
+Enabling module mpm_event.
+Enabling module authz_core.
+Enabling module authz_host.
+Enabling module authn_core.
+Enabling module auth_basic.
+Enabling module access_compat.
+Enabling module authn_file.
+Enabling module authz_user.
+Enabling module alias.
+Enabling module dir.
+Enabling module autoindex.
+Enabling module env.
+Enabling module mime.
+Enabling module negotiation.
+Enabling module setenvif.
+Enabling module filter.
+Enabling module deflate.
+Enabling module status.
+Enabling module reqtimeout.
+Enabling conf charset.
+Enabling conf localized-error-pages.
+Enabling conf other-vhosts-access-log.
+Enabling conf security.
+Enabling conf serve-cgi-bin.
+Enabling site 000-default.
+Created symlink /etc/systemd/system/multi-user.target.wants/apache2.service → /lib/systemd/system/apache2.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/apache-htcacheclean.service → /lib/systemd/system/apache-htcacheclean.service.
+Processing triggers for libc-bin (2.24-11+deb9u1) ...
+Processing triggers for systemd (232-25+deb9u1) ...
+#+end_example
+
+* TODO Pro kopírování                                                                     :noexport:
+:PROPERTIES:
+:header-args: :exports none
+:END:
+** TODO Krok 4 - začátek 
+
+#+BEGIN_VERSE
+ssh alpha.openalt
+
+ip -o addr | awk '{ print $4 }' | cut -d/ -f1
+ip -o addr | awk '{ print $4 }' | cut -d/ -f1 | grep -v -E '^(fe80|::|127\.)'
+
+ss -ltu
+#+END_VERSE
+
+#+END_SRC
+
+** TODO Krok 5 - literate
+#+BEGIN_SRC text
+,* Připojíme se na server
+,* Vypíšeme si seznam adres
+,** vypíšeme jen IP adresy
+,** Vyřadíme linkové a lokální adresy
+,** zapíšeme do souboru
+,* projdeme IP ze souboru a zjistíme reverzní záznamy
+,* Vypíšeme služby, které běží na některé z IP, která nás zajímká 
+#+END_SRC
+
+#+BEGIN_SRC text
+,* Připojíme se na server
+Nejdříve se potřebujeme připojit na server, který budeme zkoumat.
+
+,* Vypíšeme si seznam adres
+Na vypsání adres by měl fungovat příkaz =ip=
+
+
+,** vypíšeme jen IP adresy
+=ip= má přepínač, přes který můžeme hodit vše na jeden řádek, ve čtvrtém sloupci je pak právě IP adresa. Uvádí se včetně masky, tu pro naše použití teď nepotřebujeme, takže vyřadíme.
+
+,** Vyřadíme linkové a lokální adresy
+Zkoumáme použité IP adresy, abychom mohli přebytečné uvolnit, takže lokální ani linkové IP nás nezajímají.
+
+,** zapíšeme do souboru
+Abychom nemuseli neustále vkládat tento příkaz dál, zapíšeme mezivýsledek.
+
+,* projdeme IP ze souboru a zjistíme reverzní záznamy
+Dál by se nám hodilo vědět, jestli má IP adresa reverzní záznam, napoví nám to, jestli je používaná.
+
+,* Vypíšeme služby, které běží na některé z IP, která nás zajímká 
+To, že je IP na serveru přidělená ještě nemusí znamenat, že je používaná. Mrkneme se přes =ss= (protože prý nesmíme přiznat, že ještě stále používáme =nestat=)
+#+END_SRC
+
+#+BEGIN_SRC text
+,* Připojíme se na server
+Nejdříve se potřebujeme připojit na server, který budeme zkoumat.
+ssh alpha.openalt
+
+,* Vypíšeme si seznam adres
+Na vypsání adres by měl fungovat příkaz =ip=
+ssh alpha.openalt ip addr
+
+,** vypíšeme jen IP adresy
+=ip= má přepínač, přes který můžeme hodit vše na jeden řádek, ve čtvrtém sloupci je pak právě IP adresa. Uvádí se včetně masky, tu pro naše použití teď nepotřebujeme, takže vyřadíme.
+ip -o addr | awk '{ print $4 }' | cut -d/ -f1
+
+,** Vyřadíme linkové a lokální adresy
+Zkoumáme použité IP adresy, abychom mohli přebytečné uvolnit, takže lokální ani linkové IP nás nezajímají.
+ip -o addr | awk '{ print $4 }' | cut -d/ -f1 | grep -v -E '^(fe80|::|127\.)'
+   
+,** zapíšeme do souboru
+Abychom nemuseli neustále vkládat tento příkaz dál, zapíšeme mezivýsledek.
+ip -o addr | awk '{ print $4 }' | cut -d/ -f1 | grep -v -E '^(fe80|::|127\.)' > ~/ips.txt
+   
+,* projdeme IP ze souboru a zjistíme reverzní záznamy
+Dál by se nám hodilo vědět, jestli má IP adresa reverzní záznam, napoví nám to, jestli je používaná.
+
+for ip in $(cat ~/ips.txt); do
+    dig +short -x $ip
+done
+
+,* Vypíšeme služby, které běží na některé z IP, která nás zajímká 
+To, že je IP na serveru přidělená ještě nemusí znamenat, že je používaná. Mrkneme se přes =ss= (protože prý nesmíme přiznat, že ještě stále používáme =nestat=)
+
+ss -lntu
+
+#+END_SRC
+
+1. spuštění
+2. spuštění na serveru
+3. výstup do tabulky
+4. práce s výstupem z tabulky
+5. více programovacích jazyků - python ukázka
+
+
+Stroje, na kterých máme zkontrolovat IP adresy:
+
+#+NAME: servers
+- alpha.openalt
+- beta.openalt
+- gamma.openalt
+  
+* Prozkoumat =alpha.openalt=
+:PROPERTIES:
+:header-args: :dir /sudo:alpha.openalt: :var server="alpha.openalt" :exports both
+:END:
+
+** Zjistit IP adresy dostupné na serveru
+Na vypsání adres by měl fungovat příkaz =ip=
+
+#+BEGIN_SRC sh :results pp
+ip addr
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:8d:c0:4d brd ff:ff:ff:ff:ff:ff
+    inet 10.0.2.15/24 brd 10.0.2.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe8d:c04d/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 08:00:27:8a:e0:2b brd ff:ff:ff:ff:ff:ff
+    inet 192.168.17.2/24 brd 192.168.17.255 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet 192.168.17.21/32 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet 192.168.17.91/32 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet 192.168.17.102/32 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet 192.168.17.88/32 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe8a:e02b/64 scope link 
+       valid_lft forever preferred_lft forever
+#+end_example
+
+Ok, uděláme si naivní filtr na loopback (a vagrantí síť) a jdeme pracovat s tím, co zbyde:
+
+*** Vypíšeme jen IP adresy
+=ip= má přepínač, přes který můžeme hodit vše na jeden řádek, ve čtvrtém sloupci je pak právě IP adresa. Uvádí se včetně masky, tu pro naše použití teď nepotřebujeme, takže vyřadíme.
+
+ip -o addr | awk '$4 !~ /^fe80:|127\.|::|10\./ { print $4 }' | cut -d/ -f1
+
+#+NAME: all_ips
+#+BEGIN_SRC sh :results table
+ip -o addr | awk '{ print $4 }' | cut -d/ -f1
+#+END_SRC
+
+#+RESULTS: all_ips
+|                127.0.0.1 |
+|                      ::1 |
+|                10.0.2.15 |
+| fe80::a00:27ff:fe8d:c04d |
+|             192.168.17.2 |
+|            192.168.17.21 |
+|            192.168.17.91 |
+|           192.168.17.102 |
+|            192.168.17.88 |
+| fe80::a00:27ff:fe8a:e02b |
+|                          |
+*** Vyřadíme linkové a lokální adresy
+Zkoumáme použité IP adresy, abychom mohli přebytečné uvolnit, takže lokální ani linkové IP nás nezajímají.
+
+Nejdřív zkusíme naivní implementaci v bashi
+
+#+NAME: ips_bash
+#+BEGIN_SRC sh :var ips=all_ips
+echo $ips | xargs -n1 echo | awk '!/^fe80:|127\.|::|10\./ { print $0 }'
+#+END_SRC
+
+**** Spolehlivější vyřazení linkových a lokálních adres
+Bash řešení jsem jen narychlo vyřadil IP, které se mi nezdály bez nějakých dalších studování. Lepší může být využít nějakou existující funkci, rychlý duckduck nenašel nic moc v bashi, zato různé implementace v pythonu. Proč ne.
+
+#+NAME: ips
+#+BEGIN_SRC python :var data=all_ips :python /usr/bin/python3
+  import ipaddress
+
+  results = []
+
+  for ip in data:
+    ip = ipaddress.ip_address(ip[0])
+    if not (ip.is_loopback or ip.is_link_local):
+      results.append([str(ip)])
+
+  return results
+#+END_SRC
+
+
+*** Zjistíme primární IP addresu
+Dobré by bylo také zjistit, která IP serveru je primární, protože tu nebudeme chtít uvolňovat.
+
+Normálně bych vyzkoušel něco ve stylu =host $server=, ale protože mám IP pro testovací servery pouze v [[/etc/hosts]] uděláme to přes =getent=: 
+
+#+NAME: primary_ip
+#+BEGIN_SRC sh :dir /tmp :results value
+host $server | awk '{ print $NF }'
+#+END_SRC
+
+#+RESULTS: primary_ip
+: 192.168.17.2
+
+*** Omrkneme reverzní záznamy
+No a v neposlední řadě by se hodilo vědět, jestli jsou pro dané IP adresy nějaké reverzní záznamy. Neexistence nám může říct, že je to něco opomenutého nebo zapomenutého, existence zas často ukazuje na hostname, které se už dávno nepoužívají.
+
+#+NAME: reverzy
+#+BEGIN_SRC sh :var ips=ips
+for ip in ${ips}; do
+    echo $ip $(dig +short -x $ip)
+done
+#+END_SRC
+
+#+RESULTS:
+|      10.0.2.15 |                      |
+|   192.168.17.2 | alpha.openalt.       |
+|  192.168.17.21 | www.icq.com.         |
+|  192.168.17.99 | localhost.           |
+|  192.168.17.66 | jak.opravit.lakatos. |
+|  192.168.17.34 | pornhub.com.         |
+|  192.168.17.91 |                      |
+| 192.168.17.102 | www.openalt.sk.      |
+|  192.168.17.88 | plus.google.com.     |
+
+
+** Prověřit na kterých IP běží nějaká služba
+
+Abychom zjistili použijeme např =ss=, příklady jak na to jde najít na http://www.binarytides.com/linux-ss-command/
+
+#+NAME: ss
+#+BEGIN_SRC sh
+ss -ltu
+#+END_SRC
+
+#+RESULTS: ss
+| Netid | State  | Recv-Q | Send-Q | Local              | Address:Port | Peer | Address:Port |
+| udp   | UNCONN |      0 |      0 | *:bootpc           | *:*          |      |              |
+| tcp   | LISTEN |      0 |    128 | 192.168.17.21:http | *:*          |      |              |
+| tcp   | LISTEN |      0 |    128 | *:ssh              | *:*          |      |              |
+| tcp   | LISTEN |      0 |    128 | 127.0.0.1:11000    | *:*          |      |              |
+| tcp   | LISTEN |      0 |    128 | :::ssh             | :::*         |      |              |
+
+* Prozkoumat =beta.openalt=
+:PROPERTIES:
+:header-args: :dir /sudo:beta.openalt: :var server="beta.openalt" :exports both
+:END:
+
+** Zjistit IP adresy dostupné na serveru
+
+Vypsání všech IP
+
+#+CALL: ips[]
+
+#+RESULTS:
+|      10.0.2.15 |
+|   192.168.17.3 |
+|  192.168.17.27 |
+| 192.168.17.133 |
+|  192.168.17.98 |
+|  192.168.17.11 |
+|  192.168.17.12 |
+|  192.168.17.15 |
+|  192.168.17.33 |
+|  192.168.17.44 |
+
+Zjištění primární IP
+
+#+CALL:primary_ip[:dir /tmp]
+
+#+RESULTS:
+: 192.168.17.3
+
+#+CALL:reverzy()
+
+#+RESULTS:
+|      10.0.2.15 |                       |
+|   192.168.17.3 | beta.openalt.         |
+|  192.168.17.27 | test.openalt.         |
+| 192.168.17.133 | test2.openalt.        |
+|  192.168.17.98 | zapomenuty.openrelay. |
+|  192.168.17.11 | hokus.pokus.          |
+|  192.168.17.12 | www.igloonet.eu.      |
+|  192.168.17.15 |                       |
+|  192.168.17.33 |                       |
+|  192.168.17.44 |                       |
+
+** Prověřit na kterých IP běží nějaká služba
+
+#+CALL: ss()
+
+#+RESULTS:
+| Netid | State  | Recv-Q | Send-Q | Local    | Address:Port | Peer | Address:Port |
+| udp   | UNCONN |      0 |      0 | *:bootpc | *:*          |      |              |
+| tcp   | LISTEN |      0 |    128 | *:ssh    | *:*          |      |              |
+| tcp   | LISTEN |      0 |    100 | *:smtp   | *:*          |      |              |
+| tcp   | LISTEN |      0 |    128 | :::ssh   | :::*         |      |              |
+| tcp   | LISTEN |      0 |    100 | :::smtp  | :::*         |      |              |
+

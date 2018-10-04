@@ -1,0 +1,6 @@
+vagrants/*
+testy/*
+*.html
+*.pdf
+*.tex
+*.te~

@@ -1,0 +1,64 @@
+#+TITLE: Přednášky hostingové části igloonet
+
+Zde náhodně shromažďujeme prezentace a další materiály k přednáškám, které jsme
+v rámci hosting týmu někde zvládli.
+
+Pokud jste na nějaké naší přednášce byli, toužíte po ni a chybí tu, zkuste
+vyrobit issue, snad ji někde najdeme a přidáme.
+
+* 2018
+** LinuxDays
+[[https://www.linuxdays.cz/2018/][LinuxDays]] 6. - 7. října 2018 v Praze
+
+*** INPROG Literární adminování
+/Přednáška | 105 | Sobota 6. listopadu 2018, 14:00 - 14:50/
+/Workshop | 345 | Sobota 6. listopadu 2018, 16:00 - 17:00/
+
+#+BEGIN_QUOTE
+Používáte na serverech Bash? Zsh? A jak hledáte v historii? Děláte sami nebo s
+kolegy? Dokumentujete? Vzpomenete si po dvou letech, jak jste tenkrát rozjížděli
+Galera Cluster?
+
+Postupů jak řešit administraci serverů je spoustu. Chtěl bych vám ukázat
+postupy, které používáme v igloonetu při nasazování nových věcí pro nás i
+zákazníky.
+#+END_QUOTE
+
+- [[./2018/linuxdays/linuxdays_adminovani_testovani.org][Instrukce pro testování]]
+- [[./2018/linuxdays/linuxdays_adminovani_priklad.org][Literární hrátky - příklad na vyzkoušení]]
+
+** OpenAlt
+[[https://openalt.cz/2018/][OpenAlt]] 3. - 4. listopadu 2018 v Brně
+
+*** NEXT Úvod do Spacemacsu aneb jak na Vim v OS Emacs
+/Přednáška | E104 | Sobota 3. listopadu 2018, 16:00 - 16:45/
+
+#+BEGIN_QUOTE
+O "svaté válce" Emacsu a Vi(m) se píše už téměř tři dekády. Fousatý fórek říká, že Emacs je výborný operační systém se špatným editorem. Přes 12 krásných let s Vimem jsem se tomu smál jako vtipu, teď tomu konečně věřím. Chtěl bych vám představit projekt Spacemacs, který pomůže i ostříleným Vimařům vyzkoušet Emacs tak, že se budou během pár minut cítit jako doma. Bez zlomených prstů. Přednáška je vhodná zejména jako úvod pro ty, kteří se se Spacemacsem ještě nesetkali nebo jen letmo. Je jedno, jestli jste Vimař, frčíte na věcech jako Sublime a Atom nebo používáte něco úplně jiného (Nano?!) . Ukážeme si jak editovat text! A pak ještě další věci, které Spacemacs může dělat - IDE, mail klient, organizátor času, terminál a další srandičky. Po přednášce byste měli být schopni ihned naskočit a Spacemacs používat.
+#+END_QUOTE
+
+*** NEXT gopass: správce hesel nejen z terminálu, pro sebe i v týmu
+/Přednáška | D0207 | Sobota 3. listopadu 2018, 12:00 - 12:45/
+
+#+BEGIN_QUOTE
+gopass je dle vlastního sloganu jednoduchý, ale mocný nástroj pro správu hesel v terminálu. V přednášce vám nebudu předčítat z helpu a nebudu snad ani moc filozofovat. Proč vlastně používat klíčenku vám sice krátce řeknu, ale lépe jste to už určitě slyšeli od Michala Špačka. Chtěl bych vám spíše ukázat, proč vlastně stojí za to zvážit použití gopassu, passu nebo podobného nástroje. Jak jej používat v týmu, jak s ním automatizovat, vyrobit si vlastní auto-type, propojit jej s prohlížečem, využít pro (T)OTP, napojit na ansible a možná ještě něco navíc.
+#+END_QUOTE
+
+*** NEXT Organizujte se v org-mode
+/Přednáška | E105 | Sobota 3. listopadu 2018, 10:00 - 11:30/
+
+Máte chaos v poznámkách, zapomínáte na schůzky? Papíry, 5 online systémů, 3 v mobilu, něco v mailech? Nebo ve všem pořádek, ale stojí to dost úsilí? Přijďte si poslechnout, s čím vším vám může org-mode pomoci nejen při organizaci času, poznámek, záložek a skriptů. Dozvíte se, co všechno jsem už pro podobné úkoly vyzkoušel, jak se dá implementovat GTD, pracovat i z mobilu a navíc bez cizích cloudů. Praktické ukázky, příklady a snad i ready-to-take konfigurace. Přednáška bude rozšířenou verzí přednášky přihlášené na LinuxDays.
+
+* 2017
+
+** OpenAlt
+*** Adminování - snadno, rychle, opakovatelně
+/Přednáška | D0206 | Neděle 13:00 - 14:00 |/
+
+#+BEGIN_QUOTE
+Taky jste už potřebovali na serveru udělat tu věc, kterou jste přece řešili dva měsíce zpátky? Nebo rok? Potřebujete občas vyzkoušet nějaký postup a předat ho kolegům, ale vaše poznámky neexistují nebo z nich nikdo nic nepochopí? Chcete mít dokumentaci postupů, která vás bude bavit dělat, jednoduše se exportuje, udržuje aktuální a dokonce se dá přímo spustit jako skript? Způsobů, jak tyto problémy řešit, je nespočet. Pokud hledáte inspiraci, přijďte se podívat na ten, kterým si ulehčujeme práci v igloonetu. Ukážeme vám, jak využít (space)emacs a org-mode jako pomocníky při správě serverů a proč už si bez nich adminování nedokážeme představit.
+#+END_QUOTE
+
+- [[./2017/openalt/adminovani-snadno-rychle-opakovatelne.pdf][Prezentace]]
+- [[https://www.superlectures.com/openalt2017/adminovani-snadno-rychle-opakovatelne][Záznam]]
+- [[./2017/openalt/priklad/openalt2017_literate_sysadmin.org][Příklad v org]]
