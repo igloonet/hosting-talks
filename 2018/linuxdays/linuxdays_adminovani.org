@@ -1,0 +1,289 @@
+#+TITLE: Literární adminování
+#+AUTHOR: Kepi
+#+DATE: 2018-10-06
+#+OPTIONS: toc:nil reveal_control:nil reveal_history:t num:nil date:nil reveal_title_slide:"<h2>%t</h2><h3>%a</h3><p>%d</p>" reveal_single_file:nil
+#+REVEAL_HLEVEL: 2
+#+REVEAL_THEME: solarized
+#+REVEAL_THEME: moon
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js@3.7.0/
+#+REVEAL_EXTRA_CSS: https://use.fontawesome.com/releases/v5.3.1/css/all.css
+#+REVEAL_EXTRA_CSS: ./linuxdays/custom.css
+#+REVEAL_TRANS: cube
+#+REVEAL_MARGIN: 0.1
+
+
+* Úvod
+** Ondra Kudlík (Kepi)
+:PROPERTIES:
+:CUSTOM_ID: kepi
+:END:
+
+#+ATTR_HTML: :class igloo
+[[https://igloonet.cz][ igloonet.cz]]
+
+ [[https://twitter.com/kepicz][@KepiCZ]] |  [[https://github.com/kepi][kepi]]
+#+BEGIN_QUOTE
+S Linuxem si hraju cca 17 let a nějakých 15 se starám o servery na našem hostingu.
+#+END_QUOTE
+
+** Adminování
+:PROPERTIES:
+:CUSTOM_ID: adminovani
+:END:
+- myšleno jako proces provádění administrace serverů
+- asi není příliš rozšířený pojem, možná ani není pojem
+
+** Co vás čeká
+:PROPERTIES:
+:CUSTOM_ID: co-vas-ceka
+:END:
+
+1. Prolítnutí různých způsobů adminování.
+2. Literární adminování - co to je a proč ho používat.
+3. Org-mode for the rescue
+4. Ukázka
+5. Závěr
+
+** Způsoby adminování
+:PROPERTIES:
+:CUSTOM_ID: zpusoby
+:END:
+
+*** Ručně v Shellu
+:PROPERTIES:
+:CUSTOM_ID: rucne
+:END:
+
+#+ATTR_HTML: :class pros
+#+BEGIN_leftcol
+#+ATTR_REVEAL: :frag (appear)
++ rychlé řešení jednorázových problémů
++ snadné zkoušení
+#+END_leftcol
+
+#+ATTR_HTML: :class cons
+#+BEGIN_rightcol
+#+ATTR_REVEAL: :frag (appear)
+- nezdokumentovaný postup /(kromě historie)/
+- nevede k dokumentaci
+- nedá se snadno opakovat
+#+END_rightcol
+
+*** Automatizace
+:PROPERTIES:
+:CUSTOM_ID: automatizace
+:END:
+
+#+ATTR_HTML: :class pros
+#+BEGIN_leftcol
+#+ATTR_REVEAL: :frag (appear)
++ opakovatelnost
++ idempotence
++ zdokumentovaný postup
++ možnost využití existujících postupů
++ stejné prostředí pro práci
+#+END_leftcol
+
+#+ATTR_HTML: :class cons
+#+BEGIN_rightcol
+#+ATTR_REVEAL: :frag (appear)
+- zbytečná práce při prototypování věcí co nedopadnou
+- nevede příliš k dobré dokumentaci
+- možnost využití existujících postupů
+#+END_rightcol
+  
+* Literární adminování
+:PROPERTIES:
+:CUSTOM_ID: literarni-adminovani
+:END:
+** Literární programování
+:PROPERTIES:
+:CUSTOM_ID: literarni-programovani
+:END:
+Poprvé představil Donald E. Knuth v roce 1984.
+
+#+BEGIN_QUOTE
+Literate programming is a programming paradigm in which a program is given as an explanation of the program logic in a natural language, such as English, interspersed with snippets of macros and traditional source code, from which a compilable source code can be generated.
+#+END_QUOTE
+
+** Literární adminování
+:PROPERTIES:
+:CUSTOM_ID: la
+:END:
+
+/Literate DevOps/
+
+Obdobný přístup aplikovaný na adminování. Píše a přednáší o něm zejména [[http://www.howardabrams.com/][Howard Abrams]].
+
+** Výhody a nevýhody
+:PROPERTIES:
+:CUSTOM_ID: la-ne-vyhody
+:END:
+
+#+ATTR_HTML: :class pros
+#+BEGIN_leftcol
+#+ATTR_REVEAL: :frag (appear)
++ rychlé řešení jednorázových problémů
++ snadné zkoušení
++ opakovatelnost
++ zdokumentovaný postup
++ stejné prostředí pro práci
+#+END_leftcol
+
+#+ATTR_HTML: :class cons
+#+BEGIN_rightcol
+#+ATTR_REVEAL: :frag (appear)
+- idempotence - možná jen o maličko snadnější než v čistém shellu
+- nehodí se jako řešení pro automatizaci
+#+END_rightcol
+
+** Proč to používáme?
+:PROPERTIES:
+:CUSTOM_ID: proc
+:END:
+
+#+ATTR_HTML: :class emph
+#+ATTR_REVEAL: :frag (appear)
+- Spravujeme i pro zákazníky, /nejedeme/ to stejné stále /dokola/.
+- Často /prototypujeme/ - instalujeme nové programy, zkoušíme jestli fungují, zahazujeme když nefungují.
+- Potřebujeme /zastupitelnost/. Systém /to ví Kepi/ se neosvědčil.
+- Děláme věci, které běží (ať už je to zamýšleno nebo ne) spoustu let, potřebujeme je /udržovat/.
+- Potřebujeme /předávat postupy/. Kolegům i zákazníkům.
+- Protože je to /pohodlnější/.
+- Protože je to mnohem větší /zábava/.
+
+** Co tedy potřebujeme
+:PROPERTIES:
+:CUSTOM_ID: potrebujeme
+:END:
+
+#+ATTR_HTML: :class emph
+#+ATTR_REVEAL: :frag (appear)
+1. umět /popsat/, co děláme
+2. umět zapsat /formátovaný/ text
+3. do textu doplnit /příkazy/
+4. umět příkazy pohodlně /spustit lokálně/ i na /serverech/
+5. získat /výstup/ a /zobrazit/ jej přímo v dokumentu
+6. pohodlně /exportovat/
+
+* Org-mode
+:PROPERTIES:
+:CUSTOM_ID: org-mode
+:END:
+** Proč org-mode
+:PROPERTIES:
+:CUSTOM_ID: proc-org
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+1. využíváme jej už teď pro spoustu dalších věcí
+2. splňuje vše, co potřebujeme
+3. lze snadno rozšiřovat
+4. lze kombinovat s dalšími vstupy\\
+   /SQL, CSV, programovací jazyky, soubory.../
+5. lze exportovat do spousty formátů\\
+   /html, pdf, odt, docx, plain, beamer, cokoliv z pandocu, .../
+
+** Org Formát
+:PROPERTIES:
+:CUSTOM_ID: org-format
+:END:
+
+[[file:./linuxdays/org_formatovani.png]]
+ 
+** Org Babel
+:PROPERTIES:
+:CUSTOM_ID: org-babel
+:reveal_background: ./linuxdays/bg_babel_tower.jpg
+:reveal_background_trans: slide
+:END:
+
+#+BEGIN_EXAMPLE
+#+BEGIN_SRC sh :dir /boot/efi/EFI :results table
+for i in $(ls); do
+    echo $i
+done
+#+END_SRC
+
+#+RESULTS:
+| BOOT   |
+| debian |
+| grub   |
+#+END_EXAMPLE
+
+** Rychloúvod
+:PROPERTIES:
+:CUSTOM_ID: org-rychlouvod
+:reveal_background: ./linuxdays/bg_spacemacs.png
+:reveal_background_trans: slide
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+1. nainstalujete Emacs
+2. naklonujete Spacemacs
+3. přidáte pár vrstev
+4. otevřete =.org= soubor
+
+#+ATTR_REVEAL: :frag (appear)
+*Hotovo!*
+* Ukázka
+:PROPERTIES:
+:CUSTOM_ID: org-ukazka
+:END:
+/Tak tady to asi nedopadne, ale možná.../
+
+* Závěr
+:PROPERTIES:
+:CUSTOM_ID: zaver
+:END:
+** Workshop
+:PROPERTIES:
+:CUSTOM_ID: workshop
+:END:
+Cca za hoďku (16:00 v místnosti 345) začíná workshop, kde si můžete vše prakticky vyzkoušet.
+
+Pomůžu vám s rozjetím orgu a vyzkoušíme si konkrétní příklady.
+
+** Pozvánka na OpenAlt
+:PROPERTIES:
+:CUSTOM_ID: openalt
+:END:
+
+#+ATTR_HTML: :class smaller
+/Pokud budete za měsíc v Brně a chcete se dozvědět o Org mode a Spacemacsu trochu více, stavte se na mé další přednášky:/
+
+#+ATTR_HTML: :class bigger
+- Organizujeme se v org-mode
+- Úvod do Spacemacsu
+- /gopass/
+  
+** Zdroje
+:PROPERTIES:
+:CUSTOM_ID: zdroje
+:END:
+
+#+ATTR_HTML: :class keys
+- [[http://howardism.org/Technical/Emacs/literate-devops.html][Literate DevOps]]
+- ~SPC h r~
+- ~SPC h l~ =org=
+- Org mode tutorials
+- [[http://eschulte.github.io/org-scraps/][Org-babel Scraps]]
+- [[https://orgmode.org/worg/org-contrib/babel/languages.html][Babel: Languages]]
+- [[http://pragmaticemacs.com/emacs/org-mode-basics-iv-formatting-text-and-source-code/][Org-mode basics IV: formatting text and source code]]
+  
+** A to je konec
+:PROPERTIES:
+:CUSTOM_ID: konec
+:END:
+
+#+ATTR_HTML: :class igloo
+[[./linuxdays/igloonet_logo_n.png]]
+
+
+ [[https://github.com/kepi][kepi]] |  [[https://twitter.com/kepicz][@KepiCZ]] |  [[mailto:kepi@igloonet.cz][kepi]]
+
+\\
+
+Prezentaci, její zdroják i ukázkové soubory najdete na:
+
+ [[https://github.com/igloonet/hosting-talks][igloonet/hosting-talks]]

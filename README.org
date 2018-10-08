@@ -10,9 +10,8 @@ vyrobit issue, snad ji někde najdeme a přidáme.
 ** LinuxDays
 [[https://www.linuxdays.cz/2018/][LinuxDays]] 6. - 7. října 2018 v Praze
 
-*** INPROG Literární adminování
+*** Literární adminování
 /Přednáška | 105 | Sobota 6. listopadu 2018, 14:00 - 14:50/
-/Workshop | 345 | Sobota 6. listopadu 2018, 16:00 - 17:00/
 
 #+BEGIN_QUOTE
 Používáte na serverech Bash? Zsh? A jak hledáte v historii? Děláte sami nebo s
@@ -24,6 +23,7 @@ postupy, které používáme v igloonetu při nasazování nových věcí pro n�
 zákazníky.
 #+END_QUOTE
 
+- [[https://htmlpreview.github.io/?https://raw.githubusercontent.com/igloonet/hosting-talks/master/2018/linuxdays/linuxdays_adminovani.html][Prezentace]] ([[./2018/linuxdays/linuxdays_adminovani.org][Org zdroják]], [[./2018/linuxdays/linuxdays_adminovani.pdf][PDF export]], [[https://www.youtube.com/watch?v=cZiBJBuDvRw&t=246m37s][Eéé zatím nesestříhané video]])
 - [[./2018/linuxdays/linuxdays_adminovani_testovani.org][Instrukce pro testování]]
 - [[./2018/linuxdays/linuxdays_adminovani_priklad.org][Literární hrátky - příklad na vyzkoušení]]
 
