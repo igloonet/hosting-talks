@@ -56,15 +56,35 @@ GET http://wttr.in/Praha?T0
 #+END_SRC
 
 #+RESULTS:
-: Weather report: Praha, Czech Republic
+: Weather report: Praha, Slovakia
 : 
-:      \   /     Clear
-:       .-.      13 °C          
-:    ― (   ) ―   ← 7 km/h       
+:      \   /     Sunny
+:       .-.      20 °C          
+:    ― (   ) ―   ← 9 km/h       
 :       `-’      10 km          
 :      /   \     0.0 mm         
 
 To bylo hodně užitečné, ne?
+
+*** AWK?
+Pokud jste se nadchli na přednášce Lukáše Bařinky o (g)awk, Org díky [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-awk.html][ob-awk]] umí i ten.
+
+Pojďme si například vypsat všechny uživatele s UID >= 1000 a nakonec vypsat celek.
+
+#+BEGIN_SRC awk :in-file /etc/passwd :cmd-line -F ":"
+BEGIN { pocet = 0 }
+
+$3 >= 1000 { print $1 " " $3; pocet++;  }
+
+END { print "Celkem: " pocet }
+#+END_SRC
+
+#+RESULTS:
+| nobody       | 65534 |
+| kepi         |  1000 |
+| guest        |  1001 |
+| libvirt-qemu | 64055 |
+| Celkem:      |     4 |
 
 ** Editace bloků
 Bloky můžete relativně pohodlně editovat přímo v tomto dokumentu, protože /ob/ zvýrazní syntaxi a nabídne i další srandičky. Nenabídne ale vše, takže například při psaní Bashového skriptu vám nebude napovídat [[https://github.com/koalaman/shellcheck][ShellCheck]], což by byla škoda. Jakýkoliv blok si tak můžete jednoduše otevřít v dalším okně pomocí =,'= kde se automaticky aktivuje major mód dle jazyku daného bloku. Když jste hotoví, použijete jednoduše =,,= (nebo =,c=) a vrátíte s upravným blokem.
@@ -181,12 +201,9 @@ GET ifconfig.co
 #+END_SRC
 
 #+RESULTS: mojeip2
-| 185.149.129.89 |
+| 8.8.8.8 |
 
 #+CALL: mojehostname(ip=mojeip2)
-
-#+RESULTS:
-: ip-185-149-129-89.kmenet.cz.
 
 I přesto, že bychom to opět mohli přes =curl= dát do jednoho skriptu, zásadní zde je, že jsme využili volání dvou /ob/ bloků, každého v jiném jazyce.
 
