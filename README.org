@@ -37,13 +37,6 @@ zákazníky.
 O "svaté válce" Emacsu a Vi(m) se píše už téměř tři dekády. Fousatý fórek říká, že Emacs je výborný operační systém se špatným editorem. Přes 12 krásných let s Vimem jsem se tomu smál jako vtipu, teď tomu konečně věřím. Chtěl bych vám představit projekt Spacemacs, který pomůže i ostříleným Vimařům vyzkoušet Emacs tak, že se budou během pár minut cítit jako doma. Bez zlomených prstů. Přednáška je vhodná zejména jako úvod pro ty, kteří se se Spacemacsem ještě nesetkali nebo jen letmo. Je jedno, jestli jste Vimař, frčíte na věcech jako Sublime a Atom nebo používáte něco úplně jiného (Nano?!) . Ukážeme si jak editovat text! A pak ještě další věci, které Spacemacs může dělat - IDE, mail klient, organizátor času, terminál a další srandičky. Po přednášce byste měli být schopni ihned naskočit a Spacemacs používat.
 #+END_QUOTE
 
-*** NEXT gopass: správce hesel nejen z terminálu, pro sebe i v týmu
-/Přednáška | D0207 | Sobota 3. listopadu 2018, 12:00 - 12:45/
-
-#+BEGIN_QUOTE
-gopass je dle vlastního sloganu jednoduchý, ale mocný nástroj pro správu hesel v terminálu. V přednášce vám nebudu předčítat z helpu a nebudu snad ani moc filozofovat. Proč vlastně používat klíčenku vám sice krátce řeknu, ale lépe jste to už určitě slyšeli od Michala Špačka. Chtěl bych vám spíše ukázat, proč vlastně stojí za to zvážit použití gopassu, passu nebo podobného nástroje. Jak jej používat v týmu, jak s ním automatizovat, vyrobit si vlastní auto-type, propojit jej s prohlížečem, využít pro (T)OTP, napojit na ansible a možná ještě něco navíc.
-#+END_QUOTE
-
 *** NEXT Organizujte se v org-mode
 /Přednáška | E105 | Sobota 3. listopadu 2018, 10:00 - 11:30/
 
