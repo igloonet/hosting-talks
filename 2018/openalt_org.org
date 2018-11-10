@@ -1,0 +1,1042 @@
+#+TITLE: Organizujte se
+#+AUTHOR: Kepi
+#+DATE: 2018-11-03
+#+SETUPFILE: ../themes/igloonet_solarized.setup
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h3>v&nbsp;Org&nbsp;mode</h3><h4>%a</h4><p>3.&nbsp;11.&nbsp;2018&nbsp;v&nbsp;10&nbsp;hod</p><p>#openalt</p>"
+#+REVEAL_TITLE_SLIDE_BACKGROUND: data/b9/a596d3-2697-4a42-8aa8-6221b0e6ccb3/org.png
+#+REVEAL_TITLE_SLIDE_BACKGROUND_OPACITY: 0
+
+* Úvod
+:PROPERTIES:
+:CUSTOM_ID: h-586d5226-ce8e-4490-9847-2bbe8ee9e045
+:END:
+** Ondra Kudlík (Kepi)
+:PROPERTIES:
+:CUSTOM_ID: kepi
+:END:
+
+#+ATTR_HTML: :class igloo
+[[https://igloonet.cz][ igloonet.cz]]
+
+ [[https://twitter.com/kepicz][@KepiCZ]] |  [[https://github.com/kepi][kepi]]
+#+BEGIN_QUOTE
+Vedu hostingové oddělení v [[https://igloonet.cz][igloonet]], který také spoluvlastním. Ve volném čase :) si hraju s různými OS prográmky, některé tvořím a do spousty přispívám.
+#+END_QUOTE
+** Co je cílem a co vás čeká
+:PROPERTIES:
+:CUSTOM_ID: cil
+:END:
+
+#+BEGIN_NOTES
+- přednáška je rozdělena na 2 části
+- v první si povíme o "mé" verzi GTD
+- v druhé se mrkneme na Org-mode
+#+END_NOTES
+
+*** Zvládání chaosu
+:PROPERTIES:
+:CUSTOM_ID: h-1b8c9a64-55a4-4de1-9cab-13dc5bccf710
+:END:
+
+1. Jak si vyčistit hlavu.
+2. Jak nemít stále moc práce.
+3. Jak vědět, kdy mě co čeká.
+4. Jak nezapomínat.
+5. Jak najít smlouvu, dokument, e-mail...
+
+*** Používání Org-mode
+:PROPERTIES:
+:CUSTOM_ID: h-dd2e96ec-0447-4d72-996d-856ab56839f7
+:END:
+
+1. Co to je Org-mode?
+2. Základy používání.
+3. Co vše zvládne?
+4. Vychytávky.
+
+** Pro koho přednáška je?
+:PROPERTIES:
+:CUSTOM_ID: h-859ee826-ab74-48e4-9ed4-a2aa66bda047
+:END:
+Troufnu si říct, že téměř pro každého. Zejména pro ty kteří:
+
+- chtějí mít ve věcech trošku větší pořádek
+- vůbec neví, co to je GTD
+- vědí co to je GTD, ale moc jim nejde
+- vědí co to je GTD, jde jim, ale moc se jim nelíbí nástroje
+
+#+BEGIN_NOTES
+- první část možná není pro ty, kteří už se v GTD vyznají, ale prolétneme ji docela rychle
+- druhá část zas nebude pro ty, kteří zpanikaří, když jim na chvíli seberete myš
+- jsem zastáncem postupného používání, není třeba se do toho vrhnout na 100 %
+#+END_NOTES
+
+* Nástroje
+:PROPERTIES:
+:CUSTOM_ID: nastroje
+:END:
+** Co jsem časem vyzkoušel
+:PROPERTIES:
+:CUSTOM_ID: nastroje-vyzkouseno
+:END:
+
+- Google notes
+- Evernote
+- Wunderlist
+- Evolution
+- Zim
+- Tracks
+- Google Keep
+- Redmine
+- a další
+
+** V čem je problém?
+:PROPERTIES:
+:CUSTOM_ID: nastroje-problem
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+- nástroje jsou většinou super, ale jen v nějaké oblasti
+- když už jsou docela dobré, jsou uzavřené
+- velmi často se neovládají pohodlně
+- občas se ovládají pohodlně, ale rozhodně ne efektivně
+
+#+BEGIN_NOTES
+Určitě nejsem prototyp běžného uživatele, takže mé nároky můžou být odlišné od těch vašich.
+
+Jedna důležitá zkušenost pro mě je, že zásadní jsou metody a postupy a to, jestli dle nich dokážete fungovat. K nim si pak potřebujete najít nástroj, který vyhovuje vám osobně. Pokud je to papír, hurá na něj. Je-li to Evernote, proč ne?
+#+END_NOTES
+
+* GTD ala Kepi
+:PROPERTIES:
+:CUSTOM_ID: gtd
+:END:
+
+#+BEGIN_NOTES
+Cílem není vás za dvě hoďky naučit celé GTD, ale nechat vás nakouknout do toho
+co to je a dát prostor, ať se případně zajímáte sami.
+#+END_NOTES
+
+** Ve zkratce aneb 5 Fází GTD                                              :image:todo:ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-7845534c-efe5-467d-969e-bfc6f0c10bb5
+:Attachments: gtd_faze.png
+:ID:       22e36a5f-abfa-4328-ae41-0ba0c6776be8
+:END:
+
+[[att:gtd_faze.png]]
+
+*** Zachytit (/Capture/)
+:PROPERTIES:
+:CUSTOM_ID: gtd-capture
+:END:
+**** Věc - co by jste měli zachytit?
+:PROPERTIES:
+:CUSTOM_ID: gtd-capture-vec
+:END:
+
+- Podepsal jsem novou pojistku
+- Došel toaleťák
+- Za 3 měsíce mám dát auto na technickou
+- Měl bych odpovědět na e-mail od Karla
+- Zítra mám ve dvě schůzku
+- Fakt mě zajímají vláčky
+- Za 2 až 3 roky bych si měl pořídit velblouda
+- Ta stránka o rekuperaci vypadá fakt dobře
+- Naučit se portugalsky
+
+
+#+BEGIN_NOTES
+- Principem je zachytit vše a nechat si prázdnou hlavu. Vše.
+- Není nutné vše popisovat při zadávání, naučte se do inboxu jen házet, ať je to co je to.
+#+END_NOTES
+
+**** Inbox
+:PROPERTIES:
+:CUSTOM_ID: gtd-capture-vec
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+- Bloček, [[http://www.43folders.com/2004/09/03/introducing-the-hipster-pda][hPDA]], Molesking, hromada PostItů
+- Nákupní seznam na lednici
+- Otevřené záložky v prohlížeči
+- Doručené e-maily
+- Soubory v Syncthingu, Dropboxu, Google Drive
+- RSS Feedy
+- Google Keep, Evernote, Dokument, cokoliv
+- Redmine, Jira, Github a další
+
+*** Vyjasnit (Clarify)
+:PROPERTIES:
+:CUSTOM_ID: h-e1688679-5f6e-4cc2-b4a7-d57bce41b3ba
+:END:
+
+**** Šuplíky (Buckets)
+:PROPERTIES:
+:CUSTOM_ID: h-11412e0d-042a-4b82-9425-874e2ec5346f
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+1. Koš
+2. Někdy/Možná
+3. Lechtač (Tickler)
+4. Reference
+5. Čeká na
+6. Další možné akce
+   1. Hovory
+   2. U počítače
+   3. Sprinty - kdekoliv do 10 minut
+   4. Přečíst/Revize
+   5. Nákup
+7. Kalendář
+8. Projekty
+
+#+BEGIN_NOTES
+- Koš - není to potřeba? Zahoďte to
+- Lechtač - vysvětlit
+- Projekty - dle GTD cokoliv má vícero než dva podúkolů
+#+END_NOTES
+
+**** Výběr šuplíku
+:PROPERTIES:
+:CUSTOM_ID: h-dd513c3f-01b3-41c3-b2c1-24d38673b3c9
+:END:
+
+#+BEGIN_QUOTE
+Jedna z nejtěžších věcí na GTD, pokud nemáte vše rozmyšlené a zároveň jedna z nejpřínosnějších.
+#+END_QUOTE
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+1. Dá se nad /věcí/ udělat nějaká akce?
+2. Nedá se to náhodou zvládnout do 2 minut?
+3. Jaká je další akce nad danou věcí? Místo /centrální vysavač/ přidejte úkol /Prohlédnout si recenze na centrální vysavač/
+4. Udělat? Delegovat? Odložit?
+
+#+BEGIN_NOTES
+- pomůže vše vytáhnout z hlavy a dát do systému
+- úkolem není vše rozdělit v dané chvíli, ale zadat si úkol, který se o to postará. Nepracujte, vyjasňujte.
+#+END_NOTES
+
+*** Organizovat (Organize)
+:PROPERTIES:
+:CUSTOM_ID: h-6155174a-f705-4770-a881-20da899a0684
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+/Máme vyjasněno, jak to tedy zařídíme?/
+
+#+ATTR_REVEAL: :frag (appear)
+#+BEGIN_QUOTE
+Ve fázi /organizace/ se zabýváme hlavně tím, jak zařídit funkčnost šuplíků, které jsme pro /vyjasnění/ vymysleli.
+#+END_QUOTE
+
+*** Reflektovat (Reflect)
+:PROPERTIES:
+:CUSTOM_ID: h-69a92958-4451-4a3e-8b74-2d066a3694c2
+:END:
+#+BEGIN_QUOTE
+/Reflect/ či /Review/ je nejproblematičtější a nejdůležitější částí v GTD.
+
+Bez něj systém jednoduše nikdy nebude fungovat.
+#+END_QUOTE
+
+#+ATTR_REVEAL: :frag (appear)
+1. Aktualizovat systém
+2. Poskytnout důvěryhodnou perspektivu
+
+**** Denní review
+:PROPERTIES:
+:CUSTOM_ID: h-cf559ff9-2458-41af-8420-7cfdfb588477
+:END:
+Záleží co se vám osvědčí. Můžete například:
+
+#+ATTR_REVEAL: :frag (appear)
+1. V hlavním /inboxu/: /vyjasnit/ vše relevantní, /odložit/ to co není.
+2. Projít si naplánované akce na daný den.
+3. Projít si položky ze seznamu /dalších akcí/.
+4. Upravit plán pro daný den.
+5. Projít /Čeká na/ - dle vašeho systému.
+6. Když máte čas, /vyjasnit odložené/.
+
+#+BEGIN_NOTES
+- dost se liší rozsahem, dle toho jak jste pečliví
+- o relevantnosti si povíme v dalším bodě
+- upravením plánu je např. přehozením úkolů, které nemáte šanci stihnout na jiný den
+- optimální počet úkolů na den je 1. Kdo z vás to má?
+#+END_NOTES
+
+**** Týdenní review
+:PROPERTIES:
+:CUSTOM_ID: h-243a8948-1eae-42c6-a09a-f61415aaa14d
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+1. Vše vyčistěte - projděte všechny /inboxy/, udělejte /vyjasnění/.
+2. Projděte si vše /odložené/ a /vyjasněte/.
+3. Projít si položky ze seznamu /dalších akcí/.
+4. Mrkněte se na kalendář, projděte si co máte tento týden dělat.
+5. Projděte /Čeká na/ - vždy.
+6. Projděte si projekty
+   1. má každý alespoň jednu akci?
+   2. není už něco z úkolů hotové?
+   3. není už nějaký projekt hotový komplet?
+7. Projděže si /někdy/možná/ a podobné. Když máte čas, projděte vždy vše.
+
+*** Udělat /Engage/                                                                       :ATTACH:
+:PROPERTIES:
+:ID:       2e8c5266-917f-4d71-85ae-a2a83c970d0a
+:Attachments: engage.jpg
+:CUSTOM_ID: gtd-engage
+:END:
+
+[[att:engage.jpg]]
+
+**** Kontext
+:PROPERTIES:
+:CUSTOM_ID: gtd-engage-kontext
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+1. Kde jste? /@Home, @Work, @Store/
+2. Kam míříte? /ToHome, ToWork/
+3. Odkud míříte? /FromHome/
+4. Co máte k dispozici? /UKompu/
+
+**** Dostupný čas
+:PROPERTIES:
+:CUSTOM_ID: gtd-engage-cas
+:END:
+
+Je 10 dopoledne a za hodinu máte jít s kolegy na oběd.
+
+**** Dostupná energie
+:PROPERTIES:
+:CUSTOM_ID: gtd-engage-energie
+:END:
+
+Já to vnímám většinou jako /náladu/ či /chuť/.
+
+#+ATTR_REVEAL: :frag (appear)
+#+BEGIN_smaller
+/Hraní, Flákání, Čtení, OS, Pracovní, Zkoušení, Vzdělávání/
+#+END_smaller
+ 
+**** Priorita 
+:PROPERTIES:
+:CUSTOM_ID: gtd-engage-priorita
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+- A :: kritické
+- B :: důležité
+- C :: hodilo by se
+
+#+ATTR_REVEAL: :frag (appear)
+#+BEGIN_QUOTE
+Priorita přichází na řadu *až po* /kontextu/, /dostupném času/ a /energii/.
+#+END_QUOTE
+   
+** Další poznatky
+:PROPERTIES:
+:CUSTOM_ID: h-64809934-637b-4ae7-ad47-04dae9db1c21
+:END:
+*** Dobře /věc/ popište
+:PROPERTIES:
+:CUSTOM_ID: h-5c8ab88b-dde7-4c98-8bf3-cda8dd3e5340
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+1. Akční titulek - používejte /Zařiď/, /Zapiš/, /Domluv/ místo /Zařídit/...
+2. Je-li to potřeba doplňte dobrý popis
+3. Dekomponujte. Pokud se úkol dá udělat na víc částí, rozdělte ho.
+
+#+BEGIN_NOTES
+- Věnovali jsme se tomu v části /Vyjasnit/, ale osobně na tenhle problém narážím tak často u sebe i ostatních, že jej radši zmíním zvlášť.
+- Podrobný popis je zásadní hlavně proto, že nikdy nevíte, kdy úkol opravdu uděláte. Hodně často nacházím odložené úkoly, které se odkazují na osobní domluvu v kuchyňce. Normálně paráda, ale po 5 letech?
+#+END_NOTES
+
+** Na čem to nejčastěji selhává?
+:PROPERTIES:
+:CUSTOM_ID: gtd-selhani
+:END:
+#+BEGIN_NOTES
+Probrat nejčastější překážky a co s nimi.
+#+END_NOTES
+
+*** Nezpracovávám Inbox
+:PROPERTIES:
+:CUSTOM_ID: gtd-selhani-inbox
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+- opakované procházení plných /Inboxů/
+- bojím se, že bude moc práce řešit
+- když chci řešit, tak nevím přesně kam - nutné vylepšit /vyjasnění/
+
+#+BEGIN_NOTES
+Jeden z nejpalčivějších problémů například pro mě. Jednotlivé /Inboxy/ zůstávají
+plné a neustále se k nim vracím a procházím je, jestli tam náhodou není něco, na
+co jsem nezapomněl.
+
+Vždy zjistěte proč. U mě to bylo dřív hlavně nevychytanou fází /Clarify/, prostě
+jsem nevěděl, kam něco šoupnout a toho úkolu jsem se prostě bál.
+#+END_NOTES
+
+*** Není čas na review, musím pracovat
+:PROPERTIES:
+:CUSTOM_ID: gtd-selhani-cas
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+#+BEGIN_smaller
+Bez review bohužel GTD nefunguje. Můžete se v tom plácat i\nbsp{}delší dobu, ale přínos bude minimální.
+#+END_smaller
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+- najděte si ideální čas na denní review. Někdo rád na konci dne, někdo na začátku.
+- nastavte si opakovaný úkol a dejte si do něj jednu část review
+- zkuste udělat první den kousek, další o kousek víc
+- cokoliv můžete zjednodušit, zjednodušte
+
+#+ATTR_REVEAL: :frag (appear)
+#+BEGIN_smaller
+Denní review by vám mělo zabrat cca 5 minut. Týdenní je různé, ale časem se
+vlezete bez problémů do hodiny. *Ušetříte mnohem víc*.
+#+END_smaller
+
+#+BEGIN_NOTES
+Proč je Review tak důležité? Jednoduše proto, že je to mechanismus, který
+zajišťuje, že opravdu na nic nezapomenete. Pokud ho nepoužíváte, skončíte vždy u
+toho, že jednotlivým úkolům nastavujete termíny.
+#+END_NOTES
+
+*** Nechce se dělat review
+:PROPERTIES:
+:CUSTOM_ID: gtd-selhani-chut
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+- vykašlete se na rady nejlepšího času na řešení GTD
+- vyzkoušejte různé dny a časy
+- zkuste si rozložit týdenní review na vícero částí
+- zkuste udělat týdenní review jednou za 14 dní :)
+
+#+BEGIN_NOTES
+Dan Gamrot například doporučuje dělat týdenní review v neděli večer. Pro mě je
+ale neděle velmi často den, kdy už prostě nechci sáhnout na nic.
+#+END_NOTES
+
+*** /To/ není tak důležité. Udržím to v hlavě!
+:PROPERTIES:
+:CUSTOM_ID: gtd-selhani-hlava
+:END:
+
+#+BEGIN_smaller
+Většině to bude chvíli trvat, ale časem si myslím, že k tomu dojde každý.
+
+Zásadní je přenést do /Inboxu/ opravdu vše a na nic nemyslet.
+#+END_smaller
+
+*** Pracovní věci dobrý, ale přece si nebudu psát nákup
+:PROPERTIES:
+:CUSTOM_ID: gtd-selhani-drobnosti
+:END:
+
+#+BEGIN_smaller
+To stejné jako předchozí bod. V práci si hlavu prostě nevyčistíte, když se
+budete v hlavě stále vracet k tomu, že máte po práci skočit nakoupit nebo
+přemýšlet, jestli jste zaplatili pojistku.
+
+Vyzkoušejte si to. Přidávejte po kouscích.
+#+END_smaller
+
+* Co potřebujeme?
+:PROPERTIES:
+:CUSTOM_ID: gtd-potrebujeme
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+1. Přidat /věc/ do /Inboxu/. Cokoliv, kdekoliv, kdykoliv.
+2. Zpracovat /Inbox/.
+3. Nastavit termín.
+4. Nastavit kontext, tagy a další.
+5. Přiložit obrázky, dokumenty a další soubory.
+6. Zobrazit správné úkoly ve správnou chvíli.
+7. Řešit review.
+
+* Org-mode
+:PROPERTIES:
+:CUSTOM_ID: org-mode
+:END:
+
+#+BEGIN_QUOTE
+Org mode is for keeping notes, maintaining TODO lists, planning projects, and authoring documents with a fast and effective plain-text system.
+#+END_QUOTE
+
+#+BEGIN_NOTES
+- Org mode umí téměř vše. To co neumí, ho můžete naučit.
+- Počáteční náročnost učení je složitější než u systémů typu Evernote, jakmile si ale osaháte základy, získáte mnohem více.
+#+END_NOTES
+
+** Proč Org mód
+:PROPERTIES:
+:CUSTOM_ID: proc-org
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+1. Umožňuje vše co v rámci GTD potřebujeme
+2. Je to otevřený systém nad daty v čistém textu. Nikomu se neuvážete.
+3. Umožňuje přizpůsobení konfigurace téměř libovolným potřebám.
+4. Používá ho velké množství lidí, snadno se dají najít řešení a pomoc.
+5. Postupně se objevuje se podpora v dalších nástrojích.
+
+** Org formát :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: org-format
+:Attachments: org_formatovani.png
+:ID:       99aaf5c8-3f71-4c82-86d1-cc86f7808803
+:END:
+
+[[att:org_formatovani.png]]
+
+** Org struktura 
+:PROPERTIES:
+:CUSTOM_ID: org-struktura
+:END:
+- Org umí pracovat s jedním či více soubory
+- Logické celky jsou oddělené hlavičkami, které se zanořují pod sebe
+- Počet úrovní zanoření není omezený
+
+** Rychlé rozjetí :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: org-rychlouvod
+:reveal_background: data/a5/3d8bea-6c21-4fac-9ac9-b4310b733684/bg_spacemacs.png
+:reveal_background_trans: slide
+:Attachments: bg_spacemacs.png
+:ID:       a53d8bea-6c21-4fac-9ac9-b4310b733684
+:END:
+
+Více se můžete dozvědět dnes ve čtyři na mé další přednášce nebo ze zdrojů.
+
+#+ATTR_REVEAL: :frag (appear)
+1. [[https://github.com/syl20bnr/spacemacs/tree/develop#emacs][nainstalujete Emacs]]
+2. [[https://github.com/syl20bnr/spacemacs/tree/develop#install][nainstalujete Spacemacs]] (větev *develop*)
+3. [[https://github.com/igloonet/igloonet-defaults][přidáte pár vrstev]]
+4. otevřete =.org= soubor
+
+#+ATTR_REVEAL: :frag (appear)
+*Hotovo!*
+
+* Mé GTD v Org-mode
+:PROPERTIES:
+:CUSTOM_ID: org-gtd
+:END:
+
+** Zachytit :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: org-capture
+:reveal_background: data/b9/a596d3-2697-4a42-8aa8-6221b0e6ccb3/sachachua_capturing.png
+:Attachments: sachachua_capturing.png org.png
+:ID:       b9a596d3-2697-4a42-8aa8-6221b0e6ccb3
+:END:
+*** Ruční vytvoření /věci/ :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: org-capture-manual
+:Attachments: org_capture_manual.png
+:ID:       67b070a6-ae71-4d0f-8d58-4f932645d21d
+:END:
+
+[[att:org_capture_manual.png]]
+
+*** Org capture
+:PROPERTIES:
+:CUSTOM_ID: org-capture-generic
+:END:
+/Org capture/ umožňuje zachytit
+
+- aktuální položku v Emacsu (jiný úkol, e-mail, cokoliv dalšího)
+- odkaz ve schránce
+- webovou stránku - včetně obsahu
+- obrázek
+- kontakt
+- e-mail
+- téměř cokoliv dalšího
+
+**** Výchozí TODO :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: org-capture-simple
+:Attachments: org-capture-simple.png
+:ID:       dc7f2378-515a-4991-afb5-75869a067d94
+:END:
+
+[[att:org-capture-simple.png]]
+
+**** Šablony pro /zachytávání/
+:PROPERTIES:
+:CUSTOM_ID: org-capture-templates
+:END:
+
+#+BEGIN_NOTES
+Díky [[https://orgmode.org/guide/Capture.html#Capture][Org Capture ]]šablonám můžeme vytvářet v podstatě libovolné záznamy na libovolném místě naší struktury.
+#+END_NOTES
+
+***** Určíme písmenko, pod kterým šablonu zavoláme. Může být hierarchické.
+:PROPERTIES:
+:CUSTOM_ID: h-2f37c7c3-cf7f-4549-8704-a1072a54dfab
+:END:
+
+***** Můžeme určit jakou položku zachycujeme
+:PROPERTIES:
+:CUSTOM_ID: h-cc09193f-4642-4bcf-939c-28d97fe821e8
+:END:
+
+   #+ATTR_REVEAL: :frag (appear)
+   - Jako vlastní záznam
+   - Jako položka do seznamu
+   - Jako zaškrtávací položka do seznamu
+   - Jako nový řádek tabulky
+
+***** Můžeme vybrat kam se má ukládat
+:PROPERTIES:
+:CUSTOM_ID: h-a9dcf32c-6adf-4aee-accf-77539696d919
+:END:
+   #+ATTR_REVEAL: :frag (appear)
+   - Konkrétní soubor
+   - Konkrétní nadpis (unikátní, v hierarchii nebo regexpem)
+   - Strom dle data (např. pro deník)
+   - Aktivní položka ve které trackujeme čas
+   - A samozřejmě vlastní funkce určující kam
+***** Speciální vlastnosti
+:PROPERTIES:
+:CUSTOM_ID: h-9d076d85-124a-45e6-b466-990e91bd6b73
+:END:
+   #+ATTR_REVEAL: :frag (appear)
+   - Okamžité přidání bez ručního doplňování informací
+   - Zapnout nebo pokračovat v časování
+   - Zeptat se na datum a čas pro položku
+***** Nastavíme text a vlastnosti doplněné dle [[https://orgmode.org/manual/Template-expansion.html][zástupek]]:
+:PROPERTIES:
+:CUSTOM_ID: h-80a1f844-8e56-49f0-b9c9-64bf7b6955d5
+:END:
+
+   #+ATTR_REVEAL: :frag (appear)
+   - Datum, čas či kombinace
+   - Text ze schránky
+   - Soubor ve kterém jsme právě byli
+   - Dotaz na konkrétní hodnoty
+   - Umístit kurzor na specifické místo
+***** Ukázka                                                                        :todo:screencast:ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-bd27f716-ebab-4bfc-baec-5f7f9f3707de
+:Attachments: org-capture-ukazka.png
+:ID:       4238b368-8c50-40da-ac6e-10370d207541
+:END:
+[[att:org-capture-ukazka.png]]
+**** Org protocol
+:PROPERTIES:
+:CUSTOM_ID: h-94a01330-08cb-4cea-a8ef-d0c75869fe2e
+:END:
+
+[[https://orgmode.org/worg/org-contrib/org-protocol.html][Org protocol]] umožňuje skrz [[https://www.emacswiki.org/emacs/EmacsClient][Emacs Client]] zachytit zprávy, které potřebujeme.
+
+***** Webové stránky :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-53d804f9-1f32-47bf-aa37-1c37d6f56673
+:Attachments: org-capture-web.png
+:ID:       6d1b6393-7769-4c35-b013-5ea47c0bfeb4
+:END:
+
+[[att:org-capture-web.png]]
+***** E-mailový klient
+:PROPERTIES:
+:CUSTOM_ID: h-7cd69528-1dda-47bd-a867-0d74e619e7cb
+:END:
+
+- mu4e :: =SPC a o l=
+- Thunderbird :: [[https://github.com/mikehardy/thunderlink][Thunderlink]]
+- Outlook :: [[https://superuser.com/questions/71786/can-i-create-a-link-to-a-specific-email-message-in-outlook][Pár tipů na SuperUser]]
+- Gmail :: [[https://stackoverflow.com/a/48014199/259187][StackOverflow tipy]]
+
+*** Struktura /věci/ :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-c7820f8e-55c4-4505-9f9d-29876e1c8956
+:Attachments: org-struktura.png
+:ID:       08487f43-6b3b-49fe-b24d-317e3c64d467
+:END:
+[[att:org-struktura.png]]
+
+**** Struktura /věci/ - rozbalené podnadpisy :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-fae7bb7c-0dfd-421b-a2e7-6f750faedbfe
+:Attachments: org-struktura2.png
+:ID:       eacc271a-acf1-455a-bbde-e6ecb6611afc
+:END:
+[[att:org-struktura2.png]]
+*** Orgzly                                                                           :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: capture-orgzly
+:Attachments: tasks-in-orgzly.png
+:ID:       f56b7fd1-2aef-4f69-a1e8-67151ef2b80e
+:END:
+
+[[https://github.com/orgzly/orgzly-android][Orgzly]] je aplikace pro Android, která vám umožní pracovat s vašimi Org soubory téměř stejně jako na počítači.
+
+#+BEGIN_NOTES
+- osobně používám poměrně málo
+- z uživatelského hlediska by se mohla vylepšit, ale která aplikace ne
+- synchronizuji přes Syncthing
+- mám oddělený Inbox z mobilu kvůli konfliktům (Syncthing nemám server, na Dropboxu by neměl být problém)
+#+END_NOTES
+
+[[att:tasks-in-orgzly.png]]
+*** Skripty
+:PROPERTIES:
+:CUSTOM_ID: capture-scripts
+:END:
+Pracujeme s textovými soubory, takže samozřejmě není problém si vyrobit vlastní skript na capture.
+
+** Vyjasnit a Organizovat :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-790b10da-5eb3-4f8b-96f3-e6d595cbfb19
+:Attachments: gtd_kepi_vyjasnit.orig.png
+:ID:       3431bbc1-b99b-49b2-8639-293af4ddf03e
+:END:
+
+[[att:gtd_kepi_vyjasnit.orig.png]]
+
+#+BEGIN_NOTES
+- jelikož vyjasnění probíhá v naší hlavě, Org nám s ním přímo nepomůže. Ten se do akce pustí až ve fázi Organize, kdy "implementujeme" jednotlivé šuplíky.
+#+END_NOTES
+*** Stavy :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: org-clarify-states
+:Attachments: org-organize-states.png
+:ID:       16a9da93-f8e9-49e6-9709-867bb77c0f4e
+:END:
+[[att:org-organize-states.png]]
+*** Tagy :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: org-clarify-tags
+:Attachments: org-clarify-tags.png
+:ID:       f8f15c0e-e4f3-494f-980e-fec9c26ad44e
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+- předdefinované tagy
+- skupiny tagů
+- rychlo výběr tagů
+- hierarchie tagů
+- dědění tagů
+- file tagy
+
+#+ATTR_REVEAL: :frag (appear)
+[[att:org-clarify-tags.png]]
+
+*** Priority
+:PROPERTIES:
+:CUSTOM_ID: org-clarify-priorities
+:END:
+
+Výchozí jsou A, B, C, tedy přesně tak jak se nám hodí.
+
+- A :: kritické
+- B :: důležité
+- C :: hodilo by se
+
+Prioritu =B= nemusíte uvádět, je automatická.
+
+*** Schedule a Deadline :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: org-clarify-schedule
+:Attachments: schedule.png
+:ID:       b3fab718-65d5-4d6a-b69f-b116acced3e2
+:END:
+
+[[att:schedule.png]]
+
+#+BEGIN_NOTES
+- silně doporučuji používat jen tam, kde máte naplánovanou schůzku, hovor atd na konkrétní čas/den, nenahrazujte tím připomínku
+- opakování
+#+END_NOTES
+
+*** Refile
+:PROPERTIES:
+:CUSTOM_ID: org-clarify-refile
+:END:
+
+**** Standardní refile :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-6699e25e-a32d-4d1c-bf95-8cb65c8cf04e
+:Attachments: org-refile-standard.png
+:ID:       2a881b1a-1132-4c2b-b4ca-8a9236f91572
+:END:
+[[att:org-refile-standard.png]]
+
+**** Refile přes hydru                                                          :screencast:todo:ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-bcfbc33f-05a7-4903-aaf3-97173b686ae2
+:Attachments: org-refile-hydra.png
+:ID:       fefb4027-db0b-43b3-9968-e92a25684aeb
+:END:
+[[att:org-refile-hydra.png]]
+
+*** Šuplíky
+:PROPERTIES:
+:CUSTOM_ID: org-clarify-supliky
+:END:
+
+#+ATTR_HTML: :class smaller
+#+ATTR_REVEAL: :frag (appear)
+- Koš :: smazat
+- Někdy/Možná :: TODO + tag
+- Lechtač (Tickler) :: TODO + tag
+- Reference :: refile na místo pro reference
+- Čeká na :: stav
+- Další možné akce
+  - Hovory :: stav
+  - U počítače :: tag
+  - Sprinty :: tag
+  - Přečíst/Revize :: tag
+  - Nákup :: tag kontextu
+- Kalendář :: schedule / deadline
+- Projekty :: tag případně jiné členění
+
+** Reflektovat
+:PROPERTIES:
+:CUSTOM_ID: h-e4eab1e8-33ce-4393-8987-330e65aba3a7
+:END:
+*** Agenda :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-87a4d81d-c840-4e59-9608-854626d0a5b5
+:Attachments: org-agenda-menu.png
+:ID:       4e83404a-a9ab-4c1d-8c4a-8d5d3c3f3ca3
+:END:
+
+[[att:org-agenda-menu.png]]
+
+**** Možnosti
+:PROPERTIES:
+:CUSTOM_ID: h-0fe085ad-c600-4766-8df3-0b564db600ee
+:END:
+- vyhledávání a filtrování
+- denní/týdenní/měsíční/roční zobrazení
+- pouvání termínů
+- přepínání zobrazeného dne
+
+**** Výchozí denní agenda :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-e8672744-e377-4e7b-9a5b-4c96e818c4de
+:Attachments: org-agenda.png
+:ID:       bb5117dd-f4b0-4308-89fc-d30fecf2f79b
+:END:
+[[att:org-agenda.png]]
+
+**** Vyhledávání
+:PROPERTIES:
+:CUSTOM_ID: h-b7a4b931-7055-4823-a57a-a037a15c45df
+:END:
+
+**** Vícero agend
+:PROPERTIES:
+:CUSTOM_ID: h-83911cec-5024-46b7-ace3-2132769be13e
+:END:
+***** Denní review
+:PROPERTIES:
+:CUSTOM_ID: h-8cfcedd7-5372-40e1-af48-fb5fa668e146
+:END:
+
+***** Týdenní review
+:PROPERTIES:
+:CUSTOM_ID: h-1193d96c-4ede-445b-b65d-a95062253c97
+:END:
+
+**** Označování a hromadné akce :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-5749b3f4-c99b-4fe1-984b-9769de0c2e6e
+:Attachments: org-agenda-akce.png
+:ID:       9b2a098c-a595-4f51-87d5-9f09e69906b3
+:END:
+[[att:org-agenda-akce.png]]
+*** Archiv
+:PROPERTIES:
+:CUSTOM_ID: h-a82161d8-b69e-4c6c-a370-a20f57e52c2f
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+1. archivace v rámci dokumentu
+2. archivace bokem
+3. archivace stromu
+4. vyhledávání v archivu
+
+** Udělat :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: h-aaea92f5-c028-4f64-9c33-ccdf6d208c65
+:Attachments: org-agenda-denni.png
+:ID:       951134da-fb10-4223-a43e-ee3db1263128
+:END:
+
+[[att:org-agenda-denni.png]]
+
+#+BEGIN_NOTES
+- zobrazit úkol na kterém mám pracovat
+#+END_NOTES
+
+*** Další pomůcky
+:PROPERTIES:
+:CUSTOM_ID: h-7f05c1b6-eaf8-43ab-a96f-e77572ed58ea
+:END:
+
+#+ATTR_REVEAL: :frag (fade-in-then-semi-out)
+- clocking
+- logbook
+- změna stavů
+- INPROG úkoly
+- psaní postupu
+- export
+ 
+#+BEGIN_NOTES
+Nezdá se to, ale tohle je jedna z částí, kde je nástroj nejvíce potřeba. Pokud
+vás nástroj nechá ve štychu a vy stejně nevíte, na co se v daném kontextu,
+místě, čase vrhnout, není to nic moc.
+#+END_NOTES
+
+* Vychytávky do Orgu
+:PROPERTIES:
+:CUSTOM_ID: h-25d7982b-5cda-4119-8241-edf6a4d0a4ed
+:END:
+
+** Org columns
+:PROPERTIES:
+:CUSTOM_ID: h-efdabdfe-dab5-4029-834d-078c98c30596
+:ATTACH_DIR: /home/kepi/org/prezentace/2018/openalt_org_att
+:Attachments: org-vychytavky-columns.png
+:END:
+[[att:org-vychytavky-columns.png]]
+** Org attach
+:PROPERTIES:
+:CUSTOM_ID: h-5845d728-aaf3-4993-8cdf-2eaae5e481ad
+:END:
+
+/Umožní přiložit soubor z webu či disku k dané položce a zůstat u ní./
+
+#+BEGIN_smaller
+Opět přímo v Org módu, mrkněte tedy na [[https://orgmode.org/manual/Attachments.html][manuál]]. Klávesovka v Spacemacsu je =,A=.
+#+END_smaller
+
+** RSS Feedy
+:PROPERTIES:
+:CUSTOM_ID: h-6ef702f8-b5c5-4618-be4c-aac9325849d7
+:ATTACH_DIR: /home/kepi/org/prezentace/2018/openalt_org_att
+:Attachments: org-vychytavky-rss.png
+:END:
+
+Opět už je součástí Org módu, takže nastavení najdete v [[https://www.gnu.org/software/emacs/manual/html_node/org/RSS-feeds.html#RSS-feeds][Org Manuálu]]. Kláveskovka pro přístup k updatu a inboxu je =SPC a o f=
+
+[[att:org-vychytavky-rss.png]]
+** Org screenshot
+:PROPERTIES:
+:CUSTOM_ID: h-fd62c4fe-fa28-40be-8bd3-743041470705
+:END:
+
+Díky [[https://github.com/dfeich/org-screenshot][dfeich/org-screenshot]] lze jednoduše přímo z orgu spustit vytvoření
+screenshotu, obrázek se ihned vloží na místo, kde jste.
+
+** Organic :ATTACH:
+:PROPERTIES:
+:Attachments: org-vychytavky-organic.png
+:ID:       14390016-1dc1-4936-b381-366aa029394c
+:END:
+
+[[att:org-vychytavky-organic.png]]
+
+** Org brain
+:PROPERTIES:
+:CUSTOM_ID: h-e22b2296-a711-4704-9dec-ee53ed6adb0a
+:END:
+
+Koncept mapování přímo z Orgu díky [[https://github.com/Kungsgeten/org-brain][Kungsgeten/org-brain]].
+
+** Org mind map                                                                 :image:todo:ATTACH:
+:PROPERTIES:
+:Attachments: org-mindmap.png
+:ID:       62979720-ea70-498f-87f8-1bbd56738323
+:END:
+[[att:org-vychytavky-mindmap.png]]
+
+** Pocket reader :ATTACH:
+:PROPERTIES:
+:Attachments: with-excerpts-and-org-web-tools.png
+:ID:       ca652acd-e5b3-4957-9363-d79e2faeca18
+:END:
+
+[[att:with-excerpts-and-org-web-tools.png]]
+** Org babel
+:PROPERTIES:
+:CUSTOM_ID: h-4d8d906e-75f6-4213-af47-04b9636a8e52
+:END:
+
+#+BEGIN_smaller
+Jako poslední ten naprosto nejdůležitější, alespoň pro mě :) Používání kódu z různých programovacíh jazyků přímo z Org mode.
+#+END_smaller
+
+#+BEGIN_EXAMPLE
+#+BEGIN_SRC http :pretty
+GET http://wttr.in/Brno?T0
+#+END_SRC
+
+#+RESULTS:
+: Weather report: Brno, Czech Republic
+: 
+:     \  /       Partly cloudy
+:   _ /"".-.     14 °C          
+:     \_(   ).   ← 6 km/h       
+:     /(___(__)  20 km          
+:                0.0 mm         
+#+END_EXAMPLE
+
+* Závěr
+:PROPERTIES:
+:CUSTOM_ID: zaver
+:END:
+** Úvod do Spacemacsu
+:PROPERTIES:
+:CUSTOM_ID: spacemacs
+:END:
+
+Komu se Org zalíbil, v 16 mám přednášku, kde se můžete naučit jak si ho rychle zprovoznit :)
+
+** Zdroje
+:PROPERTIES:
+:CUSTOM_ID: zdroje
+:END:
+
+#+ATTR_HTML: :class keys
+- ~SPC h l~ =org=
+- [[https://www.melvil.cz/kniha-mit-vse-hotovo/][Mít vše hotovo (2016)]]
+- [[https://joebuhlig.com/getting-things-done-introduction/][Getting Things Done: Introduction]]
+- [[http://blog.gtdnext.com/prioritize-work-using-gtd/][How to Prioritize your work using GTD]]
+- [[http://pragmaticemacs.com/emacs/org-mode-basics-iv-formatting-text-and-source-code/][Org-mode basics IV: formatting text and source code]]
+- [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
+- [[http://sachachua.com/blog/category/geek/emacs/org/][#org na Living an Awesome Life]]
+- [[http://comments.gmane.org/gmane.emacs.orgmode/46641][Jak na upozornění (reminders) v Org]]
+
+#+BEGIN_smaller
+/V prezentaci bylo použito několik obrázků (všechny ručně vypdající náčrtky) od [[http://sachachua.com/blog/][Sacha Chua]], licence [[https://creativecommons.org/licenses/by-nc-sa/3.0/][CC BY-NC-SA 3.0]]./
+#+END_smaller
+ 
+** A to je konec
+:PROPERTIES:
+:CUSTOM_ID: konec
+:END:
+
+#+ATTR_HTML: :class igloo
+[[file:../themes/igloonet_logo.png]]
+
+
+ [[https://github.com/kepi][kepi]] |  [[https://twitter.com/kepicz][@KepiCZ]] |  [[mailto:kepi@igloonet.cz][kepi]]
+
+\\
+
+Prezentaci, její zdroják i ukázkové soubory najdete na:
+
+ [[https://github.com/igloonet/hosting-talks][igloonet/hosting-talks]]

@@ -1,0 +1,300 @@
+#+TITLE: Hrátky s orgem
+#+PROPERTY: header-args:sh :results verbatim
+#+PROPERTY: org-startup-with-inline-images t
+
+Tento soubor můžete použít na zkoušení a hraní s /Org-mode/, ať nemusíte začínat
+úplně od začátku. Pokusím se popisovat co se v dané chvíli děje a jak vše
+použít.
+
+* Pár poznámek na začátek
+1. Předpokládám použití Linuxu. Na Macu asi nebudou sedět cesty, na Windows záleží jestli máte dostupné klasické linux příkazy.
+2. Všechny zmíněné zkratky vycházejí z použití [[https://spacemacs.org][Spacemacs]] /develop/ verze ve Vim módu.
+3. Pokud je něco uvedeno mezi dvěmi znaky "rovná se", jde o označení neformátovaného textu. Pokud tedy píšu např. o tom, že inline kód označíte pomocí =~=, použijete jednoduše ~hostname~ už bez těch rovnítek.
+4. Výcházím z toho, že používáte [[https://spacemacs.org][Spacemacs]] develop s konfigurací, kterou jsem pro tento pokus připravil. Pokud ne, nemusí vám fungovat některé vychytávky nebo použité jazyky.
+5. Předpokládám, že znáte základní linuxové příkazy a trošku Bashe, takže nevysvětluji použité příkazy.
+   
+* Nedestruktivní hrátky s lokálním systémem
+** Spouštění bloků
+/Org-babel/ (dále jen /ob/) blok začíná pomocí =#+BEGIN_SRC= a končí =#+END_SRC=. Aby jste se neupsali k smrti, stačí napsat pouze =<s= a zmáčknout =TAB=.
+
+#+BEGIN_SRC 
+hostname
+#+END_SRC
+
+Aby šel daný blok opravdu spustit, musíme mu nejdříve říct, v jakém se nachází jazyce. Toho dosáhneme jednoduše napsáním zkratky jazyka za begin část, např. pro shell to bude =+BEGIN_SRC sh=.
+
+#+BEGIN_SRC sh
+hostname
+#+END_SRC
+
+Kdykoliv chceme, můžeme si takový blok spustit. Jednoduše najeďte kamkoliv do bloku nebo jeho hlavičku a v /normal/ módu zmáčkněte dvakrát čárku =,,=.
+
+#+BEGIN_SRC sh
+hostname
+#+END_SRC
+
+#+RESULTS:
+: starbug
+
+Pod daným blokem se nám zobrazí výsledky, jejich zobrazení můžeme ovliňovat dalšími nastaveními přes argument [[https://orgmode.org/manual/results.html][:results]].
+
+#+BEGIN_SRC sh :results table
+LC_ALL=C ls -l /boot/vml*
+#+END_SRC
+
+#+RESULTS:
+| -rw-r--r-- | 1 | root | root | 4970256 | Jun | 22 | 11:50 | /boot/vmlinuz-4.16.0-2-amd64 |
+| -rw-r--r-- | 1 | root | root | 5056368 | Aug | 18 | 14:02 | /boot/vmlinuz-4.17.0-3-amd64 |
+| -rw-r--r-- | 1 | root | root | 5121904 | Sep | 18 | 04:05 | /boot/vmlinuz-4.18.0-1-amd64 |
+
+** Další jazyky
+
+Blok nemusí být pouze shell =sh=, můžete použít libovolné další nastavené =ob= jazyky. Například =ob-http= pro posílání HTTP příkazů:
+
+#+BEGIN_SRC http :pretty
+GET http://wttr.in/Praha?T0
+#+END_SRC
+
+#+RESULTS:
+: Weather report: Praha, Slovakia
+: 
+:      \   /     Sunny
+:       .-.      20 °C          
+:    ― (   ) ―   ← 9 km/h       
+:       `-’      10 km          
+:      /   \     0.0 mm         
+
+To bylo hodně užitečné, ne?
+
+*** AWK?
+Pokud jste se nadchli na přednášce Lukáše Bařinky o (g)awk, Org díky [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-awk.html][ob-awk]] umí i ten.
+
+Pojďme si například vypsat všechny uživatele s UID >= 1000 a nakonec vypsat celek.
+
+#+BEGIN_SRC awk :in-file /etc/passwd :cmd-line -F ":"
+BEGIN { pocet = 0 }
+
+$3 >= 1000 { print $1 " " $3; pocet++;  }
+
+END { print "Celkem: " pocet }
+#+END_SRC
+
+#+RESULTS:
+| nobody       | 65534 |
+| kepi         |  1000 |
+| guest        |  1001 |
+| libvirt-qemu | 64055 |
+| Celkem:      |     4 |
+
+** Editace bloků
+Bloky můžete relativně pohodlně editovat přímo v tomto dokumentu, protože /ob/ zvýrazní syntaxi a nabídne i další srandičky. Nenabídne ale vše, takže například při psaní Bashového skriptu vám nebude napovídat [[https://github.com/koalaman/shellcheck][ShellCheck]], což by byla škoda. Jakýkoliv blok si tak můžete jednoduše otevřít v dalším okně pomocí =,'= kde se automaticky aktivuje major mód dle jazyku daného bloku. Když jste hotoví, použijete jednoduše =,,= (nebo =,c=) a vrátíte s upravným blokem.
+
+Například v tomto bloku jsou hned dva problémy, na které by vás /ShellCheck/ hned upozornil, zkuste tedy přes =,'= přejít do editace ve vlastním bufferu a uvidíte.
+
+#+BEGIN_SRC sh
+if (( $n >  3.5 )); then
+    echo "N je fakt hodně velký. Větší než 3. Možná ještě víc.".
+fi
+#+END_SRC
+
+** Argumenty, funkce a proměnné
+Pořádná sranda ale začíná s použitím argumentů (/header argsuments/), zejména proměnných. Pozor na to, že hodnoty proměnných (ne argumentů) je třeba dávat do uvozovek.
+
+#+BEGIN_SRC sh :var host="nic.cz"
+ping -c3 "$host"
+#+END_SRC
+
+#+RESULTS:
+: PING nic.cz(www.nic.cz (2001:1488:0:3::2)) 56 data bytes
+: 64 bytes from www.nic.cz (2001:1488:0:3::2): icmp_seq=1 ttl=56 time=8.37 ms
+: 64 bytes from www.nic.cz (2001:1488:0:3::2): icmp_seq=2 ttl=56 time=8.46 ms
+: 64 bytes from www.nic.cz (2001:1488:0:3::2): icmp_seq=3 ttl=56 time=8.40 ms
+: 
+: --- nic.cz ping statistics ---
+: 3 packets transmitted, 3 received, 0% packet loss, time 5ms
+: rtt min/avg/max/mdev = 8.365/8.408/8.463/0.040 ms
+
+Každý org blok si můžeme navíc pojmenovat:
+
+#+NAME: get_ip
+#+BEGIN_SRC sh :var host="nic.cz"
+dig +short "$host"
+#+END_SRC
+
+#+RESULTS: get_ip
+: 217.31.205.50
+
+A následně ho zavolat
+
+#+CALL: get_ip(host="igloonet.cz")
+
+#+RESULTS:
+: 185.50.229.181
+
+Jedním z nejvíce používaných argumentů bude asi =:dir=, který nastavuje pracovní adresář.
+
+#+BEGIN_SRC sh :var LC_ALL="C" :dir /boot/ :results table
+ls -l vml*
+#+END_SRC
+
+#+RESULTS:
+| -rw-r--r-- | 1 | root | root | 4970256 | čen | 22 | 11:50 | vmlinuz-4.16.0-2-amd64 |
+| -rw-r--r-- | 1 | root | root | 5056368 | srp | 18 | 14:02 | vmlinuz-4.17.0-3-amd64 |
+| -rw-r--r-- | 1 | root | root | 5121904 | zář | 18 | 04:05 | vmlinuz-4.18.0-1-amd64 |
+
+Argumenty jsou super, ale nikoho z nás by nebavilo zadávat je stále dokola pro více příkazů. Proto je možné nastavit je ke konkrétnímu nadpisu (headline). Argumenty pak platí pro všechny org bloky, které jsou pod tímto nadpisem.
+
+Stejně tak můžeme přes =#+PROPERTY: header-args= nastavit tyto argumenty v celém dokumentu. Teď už snad začíná dávat smysl řádek hned pod titulkem dokumentu. *Pozor*: argumenty přímo u bloku nebo nadpisu se aplikují ihned. Pokud ale přidáte celodokumentovou property, musíte ji nejdříve aktivovat (najeďte na ni kurzorem a dejte =,,= jako při spuštění bloku).
+
+*** Hrátky v bootu
+:PROPERTIES:
+:header-args:sh: :dir /boot :var LC_ALL="C" :results table
+:END:
+
+/Header args/ můžete vložit najetím na nadpis a použitím zkratky =,ip= (/insert properties/), následně napíšete =header-args:sh:= a jako hodnotu zadáte např. naše =:dir /boot=. Samozřejmě můžete celý properties blok odněkud zkopírovat, ale to je pracné. Podívejte se na nadpis této části, pod ním uvidíte =:PROPERTIES:= a v nich argumenty.
+
+Zkontrolujeme, kde jsme
+
+#+BEGIN_SRC sh
+pwd
+#+END_SRC
+
+#+RESULTS:
+| /boot |
+
+A zopakujeme předchozí příkaz. Jelikož se mohou jednotlivé argumenty přebíjet, je dobré vědět, jak se vlastně bude daný blok chovat. Pokud najedete na hlavičku v bloku, uvidíte ve stavovém řádku kompletní nastavení daného bloku.
+
+#+BEGIN_SRC sh
+ls -l vml*
+#+END_SRC
+
+#+RESULTS:
+| -rw-r--r-- | 1 | root | root | 4970256 | čen | 22 | 11:50 | vmlinuz-4.16.0-2-amd64 |
+| -rw-r--r-- | 1 | root | root | 5056368 | srp | 18 | 14:02 | vmlinuz-4.17.0-3-amd64 |
+| -rw-r--r-- | 1 | root | root | 5121904 | zář | 18 | 04:05 | vmlinuz-4.18.0-1-amd64 |
+
+** Řetězení bloků
+Bloky můžeme navíc řetězit, a výstup jednoho použív v jiném. Pojďme si zjistit naši externí IP adresu a hostname (jasně že by to šlo jednodušeji).
+
+Pozor na to, že pokud potřebujeme s výsledkem jednoho bloku dále pracovat, je potřeba správně nastavit =:results= typ. Pro další skriptování se nejvíce hodí =table= nebo =list=, které se běžně používají jako výchozí. V tomto dokumentu jsem ale na začátku přenastavil výchozí nastavení na =verbatim=, což by nám spouštění rozbilo (za vrácené proměnné by se přidávaly volné řádky).
+
+#+NAME: mojeip
+#+BEGIN_SRC sh :results table
+dig +short myip.opendns.com @resolver1.opendns.com'
+#+END_SRC
+
+#+NAME: mojehostname
+#+BEGIN_SRC sh :var ip=mojeip
+dig +short -x "$ip"
+#+END_SRC
+
+#+RESULTS: mojehostname
+: ip-185-149-129-89.kmenet.cz.
+
+Zásadní je, že když spustíte blok =mojehostname=, v proměnné chce hodnotu =mojeip=, kterou získá spuštěním daného bloku. Teď už asi tušíte, proč je nutné dávat jinak hodnoty proměnných do uvozovek. Předchozí blok nemusíte vůbec ručně spouštět, stačí spustit jen =mojehostname=.
+
+Jednodušší by v tomto případě samozřejmě bylo vše dát do jednoho skriptu místo dvou bloků. Proč je ale řetězení bloků super by vám mohla poodhalit následující variace.
+
+#+NAME: mojeip2
+#+BEGIN_SRC http :pretty :results table :curl --ipv4
+GET ifconfig.co
+#+END_SRC
+
+#+RESULTS: mojeip2
+| 8.8.8.8 |
+
+#+CALL: mojehostname(ip=mojeip2)
+
+I přesto, že bychom to opět mohli přes =curl= dát do jednoho skriptu, zásadní zde je, že jsme využili volání dvou /ob/ bloků, každého v jiném jazyce.
+
+* TRAMP 
+Díky [[http://www.gnu.org/software/tramp/][Tramp Mode]] mohou vaše org bloky začít cestovat po vzdálených systémech, užitečnost Org módu tak stoupá násobně.
+
+Použití je extrémně jednoduché, stačí pouze upravit nám již známý =:dir= argument.
+
+#+BEGIN_SRC sh :dir /ssh:kepi@server.example.com:
+hostname --fqdn
+#+END_SRC
+
+#+RESULTS:
+: server.example.com
+* Příklad nakonec: Počítáme soubory
+Naprosto nesmyslný příklad nakonec, pojďme si spočítat počty souborů v adresářích, které si sami určíme.
+
+A rozhodně to nedělejme jednoduše, hurá na to pořádně složitě.
+
+** Seznam adresářů
+#+NAME: adresare
+- /boot
+- /run
+- /tmp
+- .
+- /usr/sbin
+
+** Spočítejme soubory
+Spočítáme soubory a výsledky si uložíme do CSV, protože proč ne?
+
+V shellu by to bylo příliš rychlé a jednoduché, takže pojďme zkusit Python. Pozor na to, že [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-python.html][ob-python]] narozdíl od shellu dává do results pouze return value, ne cokoliv vypíšete na výstup (ostatně se tak chová většina jazyků, shell je spíš výjimka). Buď tedy budeme postupovat stylem jako v bashi a musíme nastavit =:results output= nebo to necháme tak a místo print vrátíme nakonec přes ~return~.
+
+#+NAME: adresare_pocty
+#+BEGIN_SRC python :var dirs=adresare :results table :preamble "# -*- coding: utf-8 -*-"
+import os, os.path
+
+counts = []
+
+# jelikož se počítá, že z listu může být snadno tabulka, proměnná dirs není jen pole hodnot, ale pole polí.
+for line in dirs:
+    # path, dirs, files = next(os.walk( line[0] ))
+    dirname = line[0]
+    
+    cpt = sum([len(files) for r, d, files in os.walk( dirname )])
+    counts.append ([ line[0], cpt])
+return counts
+#+END_SRC
+
+#+RESULTS: adresare_pocty
+| /boot     | 346 |
+| /run      | 944 |
+| /tmp      |  43 |
+| .         |  14 |
+| /usr/sbin | 365 |
+
+** Tak kolik?
+Zkusíme si to ukázat trošku lépe, co takhle nějaký malý graf? Org mode má díky [[https://orgmode.org/manual/Org_002dPlot.html][Org-Plot]] kreslení grafů přímo v sobě, zkuste dát nad naší předchozí tabulku =C-c "=. Vyzkoušejte, co se stane když použijete =a= pro graf v ASCII, nebo tu stejnou zkratku a následně =g= pro obrázek.
+
+Protože ale v tomto příkladu děláme věci komplikovaně, zkusíme si použít další jazyk, oblíbené R díky [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-R.html][ob-R]].
+
+http://r4ds.had.co.nz/data-visualisation.html
+
+#+begin_src R :results output graphics :file dir_files.png :width 16 :height 6 :res 200 :units cm :var pocty=adresare_pocty
+library(ggplot2)
+library(scales)
+
+names(pocty) <- c('Dir', 'Files')
+
+# díky https://stackoverflow.com/a/39877048/259187
+scales <- scale_y_continuous(breaks = function(x) unique(floor(pretty(seq(0, (max(x) + 1) * 1.1)))))
+
+bar <- ggplot(data = pocty) +
+  geom_bar(
+    mapping = aes(x = Dir, y = Files, fill = Dir),
+    show.legend = FALSE,
+    stat = "identity")
+bar + scales + coord_flip()
+#+END_SRC
+
+#+RESULTS:
+[[file:dir_files.png]]
+
+Pokud nemáte nainstalovanou knihovnu ggplot2, můžete buď zkusit něčím jako ~apt
+install r-cran-ggplot2~ nebo použít tento jednodušší (a ošklivější graf). Sice neozbrazuje delší textíky v popiscích, ale stejně je taky škaredý, že je to jedno.
+
+#+begin_src R :results output graphics :file dir_files2.png :width 8 :height 6 :res 200 :units cm :var pocty=adresare_pocty
+par(mar=c(2.5,2.5,1,1))
+names(pocty) <- c('Dir', 'Files')
+barplot(pocty$Files, names.arg=pocty$Dir)
+#+END_SRC
+
+#+RESULTS:
+[[file:dir_files2.png]]
+

@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+section {
+    font-family: 'Varela Round', 'Font Awesome 5 Free', 'Font Awesome 5 Brands', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Varela Round', 'Font Awesome 5 Free', 'Font Awesome 5 Brands', sans-serif !important;
+    text-transform: inherit !important;
+}
+
+ul li:before {
+}
+
+h2 {
+    color: #cb4b16 !important;
+}
+
+h3 {
+    color: #859900 !important;
+}
+
+h4 {
+    color: #268bd2 !important;
+}
+
+h5 {
+    color: #b58900 !important;
+}
+
+a {
+    color: #b58900 !important;
+}
+
+ol li,
+ul li,
+dl dt,
+dl dt {
+    font-size: 0.75em !important;
+}
+
+a.igloo:before {
+    content: "";
+    background: url('igloonet_icon.png') no-repeat;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+}
+
+section .smaller {
+    font-size: 0.75em !important;
+}
+
+#slide-org-babel {
+/* section { */
+    background: #002b36;
+    /* background: #eee8d5eb; */
+    /* background: #eee8d5eb; */
+}
+
+.reveal pre {
+    box-shadow: unset !important;
+    background: #fdf6e3;
+    padding: 1em;
+}
+
+code {
+    background: #fdf6e3 !important;
+    color: #002b36 !important;
+    padding: 0px 16px !important;
+    font-size: 0.9em !important;
+}
+
+ol.bigger li,
+ul.bigger li {
+    font-size: 1em !important;
+}
+
+section i {
+    color: #586e75;
+}
+
+section ol.emph i,
+section ul.emph i {
+    color: #2aa198;
+}
+
+.leftcol {
+    float: left;
+    width: 48%;
+}
+
+.rightcol {
+    float: right;
+    width: 48%;
+}
+
+ul.pros,
+.pros ul,
+.cons ul,
+.pros dl,
+.cons dl {
+    list-style: none;
+    padding: 0px;
+}
+
+.reveal section img {
+    border: 0px !important;
+    background: transparent;
+    box-shadow: none !important;
+
+}
+
+ ul.pros li:before,
+.pros ul li:before,
+.cons ul li:before,
+.pros dl dt:before,
+.cons dl dt:before
+{
+    margin: 0 0.2em 0 -1em;
+    line-height: 1em;
+    vertical-align: middle;
+    font-size: 0.6em;
+}
+
+ul.pros li:before,
+.pros ul li:before,
+.pros dl dt:before {
+    color: #859900;
+    content: '+';
+    content: '❯';
+}
+
+.cons ul li:before,
+.cons dl dt:before {
+    color: #cb4b16;
+    content: '-';
+    content: '❯';
+}
+
+.leftcol *,
+.rightcol * {
+    font-size: 0.9em !important;
+}
+
+blockquote {
+    width: 90% !important;
+    padding: 0.5em !important;
+    font-size: 0.8em !important;
+    text-align: left;
+}
+
+/* minor { */
+/*     color: grey; */
+/* } */
+
+/* minor:before { */
+/*     content: '('; */
+/* } */
+
+/* minor:after { */
+/*     content: ')'; */
+/* } */
+
+/* .left-align { */
+/*     text-align: left; */
+/* } */
+
+/* .footnote { */
+/*     width: 100%; */
+/*     text-align: left; */
+/*     color: grey; */
+/* } */
+
+/* Definition listy */
+.reveal dl {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+.reveal dt {
+    float: left;
+    width: 30%;
+    /* adjust the width; make sure the total of both is 100% */
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+}
+.reveal dd {
+    float: left;
+    width: 70%;
+    /* adjust the width; make sure the total of both is 100% */
+    padding: 0;
+    margin: 0;
+    font-size: inherit; 
+}
+
+#sec-title-slide:before,
+section[data-background]:before
+{
+    opacity: 0.95;
+}
+
+.smaller {
+    font-size: 0.5em !important;
+}

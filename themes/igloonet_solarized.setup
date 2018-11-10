@@ -1,0 +1,3 @@
+#+SETUPFILE: igloonet.setup
+#+REVEAL_THEME: solarized
+#+REVEAL_EXTRA_CSS: ../themes/solarized.css

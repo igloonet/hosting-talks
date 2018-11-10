@@ -23,24 +23,28 @@ postupy, které používáme v igloonetu při nasazování nových věcí pro n�
 zákazníky.
 #+END_QUOTE
 
-- [[https://htmlpreview.github.io/?https://raw.githubusercontent.com/igloonet/hosting-talks/master/2018/linuxdays/linuxdays_adminovani.html][Prezentace]] ([[./2018/linuxdays/linuxdays_adminovani.org][Org zdroják]], [[./2018/linuxdays/linuxdays_adminovani.pdf][PDF export]], [[https://www.youtube.com/watch?v=cZiBJBuDvRw&t=246m37s][Eéé zatím nesestříhané video]])
-- [[./2018/linuxdays/linuxdays_adminovani_testovani.org][Instrukce pro testování]]
-- [[./2018/linuxdays/linuxdays_adminovani_priklad.org][Literární hrátky - příklad na vyzkoušení]]
+- [[https://htmlpreview.github.io/?https://raw.githubusercontent.com/igloonet/hosting-talks/master/2018/linuxdays_adminovani.html][Prezentace]] ([[./2018/linuxdays_adminovani.org][Org zdroják]], [[./2018/linuxdays_adminovani.pdf][PDF export]], [[https://youtu.be/FNJZsaRuwW4][Video]])
+- [[./2018/linuxdays_adminovani_testovani.org][Instrukce pro testování]]
+- [[./2018/linuxdays_adminovani_priklad.org][Literární hrátky - příklad na vyzkoušení]]
 
 ** OpenAlt
 [[https://openalt.cz/2018/][OpenAlt]] 3. - 4. listopadu 2018 v Brně
 
-*** NEXT Úvod do Spacemacsu aneb jak na Vim v OS Emacs
+*** Úvod do Spacemacsu aneb jak na Vim v OS Emacs
 /Přednáška | E104 | Sobota 3. listopadu 2018, 16:00 - 16:45/
 
 #+BEGIN_QUOTE
 O "svaté válce" Emacsu a Vi(m) se píše už téměř tři dekády. Fousatý fórek říká, že Emacs je výborný operační systém se špatným editorem. Přes 12 krásných let s Vimem jsem se tomu smál jako vtipu, teď tomu konečně věřím. Chtěl bych vám představit projekt Spacemacs, který pomůže i ostříleným Vimařům vyzkoušet Emacs tak, že se budou během pár minut cítit jako doma. Bez zlomených prstů. Přednáška je vhodná zejména jako úvod pro ty, kteří se se Spacemacsem ještě nesetkali nebo jen letmo. Je jedno, jestli jste Vimař, frčíte na věcech jako Sublime a Atom nebo používáte něco úplně jiného (Nano?!) . Ukážeme si jak editovat text! A pak ještě další věci, které Spacemacs může dělat - IDE, mail klient, organizátor času, terminál a další srandičky. Po přednášce byste měli být schopni ihned naskočit a Spacemacs používat.
 #+END_QUOTE
 
-*** NEXT Organizujte se v org-mode
+- [[https://htmlpreview.github.io/?https://raw.githubusercontent.com/igloonet/hosting-talks/master/2018/openalt_spacemacs.html][prezentace]] ([[./2018/openalt_spacemacs.org][org zdroják]], [[./2018/openalt_spacemacs.pdf][pdf export]])
+
+*** Organizujte se v org-mode
 /Přednáška | E105 | Sobota 3. listopadu 2018, 10:00 - 11:30/
 
 Máte chaos v poznámkách, zapomínáte na schůzky? Papíry, 5 online systémů, 3 v mobilu, něco v mailech? Nebo ve všem pořádek, ale stojí to dost úsilí? Přijďte si poslechnout, s čím vším vám může org-mode pomoci nejen při organizaci času, poznámek, záložek a skriptů. Dozvíte se, co všechno jsem už pro podobné úkoly vyzkoušel, jak se dá implementovat GTD, pracovat i z mobilu a navíc bez cizích cloudů. Praktické ukázky, příklady a snad i ready-to-take konfigurace. Přednáška bude rozšířenou verzí přednášky přihlášené na LinuxDays.
+
+- [[https://htmlpreview.github.io/?https://raw.githubusercontent.com/igloonet/hosting-talks/master/2018/openalt_org.html][Prezentace]] ([[./2018/openalt_org.org][Org zdroják]], [[./2018/openalt_org.pdf][PDF export]])
 
 * 2017
 

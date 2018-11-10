@@ -1,0 +1,241 @@
+#+TITLE: Úvod do Spacemacsu
+#+AUTHOR: Kepi
+#+DATE: 2018-11-03
+#+SETUPFILE: ../themes/igloonet.setup
+#+OPTIONS: reveal_title_slide:"<h2>%t</h2><h4>aneb&nbsp;jak&nbsp;na&nbsp;Vim&nbsp;v&nbsp;OS&nbsp;Emacs</h4><br/><h3>%a</h3><p>%d</p>"
+
+#+BEGIN_NOTES
+O "svaté válce" Emacsu a Vi(m) se píše už téměř tři dekády. Fousatý fórek říká, že Emacs je výborný operační systém se špatným editorem. Přes 12 krásných let s Vimem jsem se tomu smál jako vtipu, teď tomu konečně věřím. Chtěl bych vám představit projekt Spacemacs, který pomůže i ostříleným Vimařům vyzkoušet Emacs tak, že se budou během pár minut cítit jako doma. Bez zlomených prstů. Přednáška je vhodná zejména jako úvod pro ty, kteří se se Spacemacsem ještě nesetkali nebo jen letmo. Je jedno, jestli jste Vimař, frčíte na věcech jako Sublime a Atom nebo používáte něco úplně jiného (Nano?!) . Ukážeme si jak editovat text! A pak ještě další věci, které Spacemacs může dělat - IDE, mail klient, organizátor času, terminál a další srandičky. Po přednášce byste měli být schopni ihned naskočit a Spacemacs používat.
+#+END_NOTES
+
+* Úvod
+:PROPERTIES:
+:CUSTOM_ID: uvod
+:END:
+** Ondra Kudlík (Kepi)
+:PROPERTIES:
+:CUSTOM_ID: kepi
+:END:
+
+ [[https://twitter.com/kepicz][@KepiCZ]] |  [[https://github.com/kepi][kepi]]
+
+/vedu hostingové oddělení/
+#+ATTR_HTML: :class igloo
+[[https://igloonet.cz][ igloonet.cz]]
+
+každý den (spíš častěji) používám
+
+- Vim asi 15 let.
+- Emacs něco přes 4 roky.
+
+** Co je cílem a co vás čeká
+:PROPERTIES:
+:CUSTOM_ID: cil
+:END:
+
+1. Vim vs Emacs.
+2. Proč vůbec zvažovat používání Emacsu?
+3. Do hry vstupuje Zlo.
+4. Spacemacs, aneb Emacs pro Vimaře.
+5. Co vše Spacemacs umí.
+6. Jak to rozjet.
+7. Jak se to nastavuje a upravuje.
+
+** Pro koho přednáška je?
+:PROPERTIES:
+:CUSTOM_ID: pro-koho
+:END:
+
+- Pro Vimaře a Vimařky, kteří /ví/, že Emacs saje.
+- Pro Vimaře a Vimařky, kteří rádi zkoumají /nové/ možnosti.
+- Pro Atomist(k)y, Sublimist(k)y, Notepadist(k)y a podobné, kterým /něco chybí/.
+- Pro ty, které jsem nalákal Org módem a chtějí to teď /v\nbsp{}něčem rozjet/.
+- Pro ty, kteří (Spac)Emacs jen oťukávají a chtějí /vědět víc/.
+- Pro (GNU) Emacsáky/Emacsačky, kteří zaslechli o Spacemacsu a chtějí /vědět proč/.
+
+#+BEGIN_NOTES
+je možné, že se dozvíte pár věcí, i když v Emacsu jedete
+#+END_NOTES
+
+* Vim vs Emacs
+:PROPERTIES:
+:CUSTOM_ID: vim-vs-emacs
+:END:
+
+#+BEGIN_CENTER
+/The best editor is neither Emacs nor Vim,/\\
+/it's Emacs *and* Vim!/
+#+END_CENTER
+
+#+ATTR_HTML: :class pros
+#+BEGIN_leftcol
+#+ATTR_REVEAL: :frag (appear)
+*Vim*
+#+ATTR_REVEAL: :frag (appear)
++ modální editor
++ zkratky
++ malá náročnost
+#+END_leftcol
+
+#+ATTR_HTML: :class pros
+#+BEGIN_rightcol
+#+ATTR_REVEAL: :frag (appear)
+*Emacs*
+#+ATTR_REVEAL: :frag (appear)
++ konfigurovatelnost
++ introspektovatelnost
++ dokumentace
+#+END_rightcol
+
+#+BEGIN_NOTES
+- introspekce
+- inkrementální programming environment
+- mutable environment
+- functionality without applications
+- úžasné koncepty software, které nejsou vůbec běžné
+  - nekonečná schránka
+  - reverse variable search
+  - structural editing
+- dokumentace
+#+END_NOTES
+
+* Emacs Evil :ATTACH:
+:PROPERTIES:
+:Attachments: evil.png
+:ID:       5d7dc3fe-27c1-451e-a496-94b549701ee5
+:CUSTOM_ID: evil
+:END:
+
+[[att:evil.png]]
+
+* (spacemacs) :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: spacemacs
+:Attachments: spacemacs.png bg_spacemacs.png
+:ID:       d4d362b6-d2e3-4f50-9792-d6225938280d
+:reveal_background: data/d4/d362b6-d2e3-4f50-9792-d6225938280d/bg_spacemacs.png
+:reveal_background_trans: slide
+:ATTACH_DIR_INHERIT: t
+:END:
+
+/Komunitou řízená distribuce Emacsu/
+
+[[att:spacemacs.png]]
+
+** Zásady
+:PROPERTIES:
+:CUSTOM_ID: spacemacs-zasady
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+1. Mnemonické
+2. Objevitelné
+3. Konzistentní
+4. Komunitně konfigurované
+
+** Co vše Spacemacs umí
+:PROPERTIES:
+:CUSTOM_ID: spacemacs-umi
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+- Editor! /[[https://github.com/emacs-evil/evil][Evil]]/
+- Mailový klient /[[http://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]]/
+- Organizátor /[[https://orgmode.org/][Org mode]]/
+- IDE pro většinu jazyků
+- Git manažer /[[https://magit.vc/][Magit]]/
+- "Prohlížeč" PDF /[[https://github.com/politza/pdf-tools][pdf-tools]]/
+- Čtečka na E-booky /[[https://github.com/wasamasa/nov.el][nov.el]]/
+- Kalendář /[[https://github.com/kiwanami/emacs-calfw][Calfw]]/
+- Klient pro Pocket /[[https://github.com/alphapapa/pocket-reader.el][pocker-reader.el]]/
+
+** Základy
+:PROPERTIES:
+:CUSTOM_ID: spacemacs-zaklady
+:END:
+
+1. Spuštění
+2. Ukončení! :)
+3. Navigace ve zkratkách
+4. Otevření souboru
+5. Buffery, Okna a Framy
+6. Helm, Ivy a podobné
+
+** Jak to rozjet :ATTACH:
+:PROPERTIES:
+:CUSTOM_ID: spacemacs-rozjeti
+:reveal_background: data/d4/d362b6-d2e3-4f50-9792-d6225938280d/bg_spacemacs.png
+:reveal_background_trans: slide
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+1. nainstalujete Emacs
+2. naklonujete Spacemacs (větev *develop*!)
+3. přidáte pár vrstev (když chcete)
+
+#+ATTR_REVEAL: :frag (appear)
+*Hotovo!*
+
+** Jak se nastavuje a upravuje? :ATTACH:
+:PROPERTIES:
+:Attachments: princess.jpg
+:ID:       0881e4c3-b640-42b5-b3ad-da140e6f9276
+:CUSTOM_ID: spacemacs-nastaveni
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+V Emacs Lispu. 
+
+#+ATTR_REVEAL: :frag (appear)
+[[att:princess.jpg]]
+
+*** Kde a co? 
+:PROPERTIES:
+:CUSTOM_ID: spacemacs-nastaveni-kde
+:END:
+
+#+ATTR_REVEAL: :frag (appear)
+1. Hlavní konfigurační soubor =SPC f e d=
+   #+ATTR_REVEAL: :frag (appear)
+   - Vrstvy
+   - Vlastní vrstvy
+   - Instalované balíky
+   - User init
+   - User config
+2. /Customize/
+   #+ATTR_REVEAL: :frag (appear)
+   - chování :: =SPC h d v=
+   - témat :: =SPC h d t=
+   - /fontů/ (face) :: =SPC h d F=
+
+* Závěr
+:PROPERTIES:
+:CUSTOM_ID: zaver
+:END:
+
+** Zdroje
+:PROPERTIES:
+:CUSTOM_ID: zdroje
+:END:
+
+#+ATTR_HTML: :class keys
+- ~SPC h l~
+- [[https://www.toggl.com/programming-princess/][Git the Princess!]]
+- [[https://github.com/Wilfred/remacs#why-emacs][Why Emacs]]
+
+** A to je konec
+:PROPERTIES:
+:CUSTOM_ID: konec
+:END:
+
+#+ATTR_HTML: :class igloo
+[[../themes/igloonet_logo_n.png]]
+
+
+ [[https://github.com/kepi][kepi]] |  [[https://twitter.com/kepicz][@KepiCZ]] |  [[mailto:kepi@igloonet.cz][kepi]]
+
+\\
+
+Prezentaci, její zdroják i ukázkové soubory najdete na:
+
+ [[https://github.com/igloonet/hosting-talks][igloonet/hosting-talks]]
